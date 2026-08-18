@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FitTrack — Track Every Rep. Reach Every Goal.</title>
+    <meta
+      name="description"
+      content="FitTrack is a premium workout tracker for logging exercises, monitoring strength, and building consistent training habits."
+    />
+    <meta property="og:title" content="FitTrack — Track Every Rep. Reach Every Goal." />
+    <meta
+      property="og:description"
+      content="Log workouts, monitor strength, build habits, and see the progress that keeps you moving."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body id="top">
+    <!-- Header -->
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true">◧</span>
+          <span class="brand-name">FitTrack</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#top">Home</a></li>
+          <li><a href="#workouts">Workouts</a></li>
+          <li><a href="#progress">Progress</a></li>
+          <li><a href="#exercises">Exercises</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+          <a class="btn-ghost" href="#contact">Login</a>
+          <a class="btn-primary" href="#contact">Join Now</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <p class="eyebrow">Train smart. Stay consistent.</p>
+        <h1 class="hero-title">
+          Track Every Rep.<br />
+          Reach Every <span class="text-forest">Goal.</span>
+        </h1>
+        <p class="hero-sub">
+          Log workouts, monitor strength, build habits, and see the progress that keeps you moving.
+        </p>
+
+        <form class="quick-form" action="#workouts">
+          <div class="field">
+            <label class="field-label" for="type">Workout type</label>
+            <select class="field-input" id="type" name="type">
+              <option>Strength Training</option>
+              <option>Hypertrophy</option>
+              <option>Conditioning</option>
+              <option>Mobility</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="exercise">Exercise</label>
+            <input class="field-input" id="exercise" name="exercise" type="text" value="Bench Press" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="date">Training date</label>
+            <input class="field-input" id="date" name="date" type="date" value="2026-08-16" />
+          </div>
+          <button class="btn-primary btn-lg" type="submit">Start Workout</button>
+        </form>
+
+        <div class="hero-ctas">
+          <a class="btn-primary btn-lg" href="#workouts">Log Workout</a>
+          <a class="btn-ghost btn-lg" href="#progress">View Progress</a>
+        </div>
+      </section>
+
+      <!-- Ticker -->
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>★ New Personal Record</span>
+          <span class="text-ember">⚡ 684 Calories Burned Today</span>
+          <span>⇄ 28 Sets Completed</span>
+          <span>▲ Consistency Builds Strength</span>
+          <span class="text-ember">▲ 12 Day Streak</span>
+          <span>★ New Personal Record</span>
+          <span class="text-ember">⚡ 684 Calories Burned Today</span>
+          <span>⇄ 28 Sets Completed</span>
+          <span>▲ Consistency Builds Strength</span>
+          <span class="text-ember">▲ 12 Day Streak</span>
+        </div>
+      </div>
+
+      <!-- Lifetime stats -->
+      <div class="wrap">
+        <div class="lifetime-stats">
+          <div><div class="stat-value">639</div><div class="stat-label">Total Workouts</div></div>
+          <div><div class="stat-value">201,275</div><div class="stat-label">Total Reps</div></div>
+          <div><div class="stat-value">44,294 kcal</div><div class="stat-label">Calories Burned</div></div>
+          <div><div class="stat-value">6 days</div><div class="stat-label">Active Streak</div></div>
+          <div><div class="stat-value">17</div><div class="stat-label">Personal Records</div></div>
+        </div>
+      </div>
+
+      <!-- Dashboard -->
+      <section class="wrap section" id="progress">
+        <p class="kicker">Dashboard</p>
+        <h2 class="section-title">Today's Overview</h2>
+        <p class="section-sub">A live snapshot of your training day — updated as you log each set.</p>
+
+        <div class="metric-grid">
+          <article class="card">
+            <div class="chip-ember">⚡</div>
+            <div class="metric-value">684</div>
+            <div class="metric-label">Calories Burned</div>
+            <div class="metric-trend text-ember">▲ +8% vs avg</div>
+          </article>
+          <article class="card">
+            <div class="chip-green">⇄</div>
+            <div class="metric-value">28</div>
+            <div class="metric-label">Total Sets</div>
+            <div class="metric-trend text-muted">▲ +3 sets</div>
+          </article>
+          <article class="card">
+            <div class="chip-green">◎</div>
+            <div class="metric-value">342</div>
+            <div class="metric-label">Total Reps</div>
+            <div class="metric-trend text-muted">▲ +11% this week</div>
+          </article>
+          <article class="card">
+            <div class="chip-green">◷</div>
+            <div class="metric-value">54m</div>
+            <div class="metric-label">Workout Duration</div>
+            <div class="metric-trend text-muted">▲ on pace</div>
+          </article>
+          <article class="card">
+            <div class="chip-ember">▲</div>
+            <div class="metric-value">12</div>
+            <div class="metric-label">Current Streak</div>
+            <div class="metric-trend text-ember">▲ personal best</div>
+          </article>
+        </div>
+
+        <div class="split-2">
+          <article class="card center">
+            <p class="day-label">Today</p>
+            <div class="ring" role="img" aria-label="78 percent of today's workout complete">
+              <div class="ring-inner">
+                <strong class="ring-pct">78%</strong>
+                <span class="ring-cap">Complete</span>
+              </div>
+            </div>
+            <h3 class="ring-title">Daily Workout Completion</h3>
+            <p class="ring-desc">
+              5 of 6 planned exercises finished. One more set of Bicep Curls to hit 100%.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="chart-head">
+              <h3 class="chart-title">Weekly Activity</h3>
+              <span class="chart-sub">Sets logged, Mon – Sun</span>
+            </div>
+            <div class="bars">
+              <div class="bar"><div class="track"><div class="fill" style="height: 62%"></div></div><div class="day">Mon</div></div>
+              <div class="bar"><div class="track"><div class="fill" style="height: 74%"></div></div><div class="day">Tue</div></div>
+              <div class="bar"><div class="track"><div class="fill" style="height: 42%"></div></div><div class="day">Wed</div></div>
+              <div class="bar"><div class="track"><div class="fill" style="height: 88%"></div></div><div class="day">Thu</div></div>
+              <div class="bar"><div class="track"><div class="fill" style="height: 58%"></div></div><div class="day">Fri</div></div>
+              <div class="bar peak"><div class="track"><div class="fill" style="height: 100%"></div></div><div class="day">Sat</div></div>
+              <div class="bar"><div class="track"><div class="fill" style="height: 16%"></div></div><div class="day">Sun</div></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Logger -->
+      <section class="wrap section" id="workouts">
+        <p class="kicker">Log Workout</p>
+        <h2 class="section-title">Add To Today's Session</h2>
+        <p class="section-sub">
+          Record every exercise the moment you finish it — sets, reps, and weight all in one place.
+        </p>
+
+        <div class="split-logger">
+          <form class="card">
+            <h3 class="form-title">Exercise Logger</h3>
+            <p class="form-sub">Fill in the details below to add a new entry.</p>
+
+            <div class="field-block">
+              <label class="field-label" for="name">Exercise name</label>
+              <input class="field-input" id="name" type="text" placeholder="e.g. Incline Dumbbell Press" />
+            </div>
+            <div class="field-row">
+              <div class="field-block">
+                <label class="field-label" for="category">Category</label>
+                <select class="field-input" id="category">
+                  <option>Chest</option>
+                  <option>Back</option>
+                  <option>Legs</option>
+                  <option>Shoulders</option>
+                  <option>Arms</option>
+                </select>
+              </div>
+              <div class="field-block">
+                <label class="field-label" for="weight">Weight (kg)</label>
+                <input class="field-input" id="weight" type="number" placeholder="60" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-block">
+                <label class="field-label" for="sets">Sets</label>
+                <input class="field-input" id="sets" type="number" placeholder="4" />
+              </div>
+              <div class="field-block">
+                <label class="field-label" for="reps">Reps</label>
+                <input class="field-input" id="reps" type="number" placeholder="10" />
+              </div>
+            </div>
+            <div class="field-block">
+              <label class="field-label" for="duration">Duration (min)</label>
+              <input class="field-input" id="duration" type="number" placeholder="12" />
+            </div>
+            <div class="field-block">
+              <label class="field-label" for="notes">Notes</label>
+              <textarea class="field-input textarea" id="notes" placeholder="How did it feel? Any form cues to remember."></textarea>
+            </div>
+            <button class="btn-primary btn-lg btn-block" type="submit">Add Exercise</button>
+          </form>
+
+          <article class="card table-card">
+            <div class="table-head">
+              <h3 class="table-title">Today's Workout</h3>
+              <span class="table-tag">Sun, 16 Aug · Upper &amp; Lower Split</span>
+            </div>
+            <div class="table-scroll">
+              <table class="workout-table">
+                <thead>
+                  <tr>
+                    <th class="th">Exercise</th>
+                    <th class="th">Sets</th>
+                    <th class="th">Reps</th>
+                    <th class="th">Weight</th>
+                    <th class="th th-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="td exercise"><strong>Bench Press</strong><small>Chest</small></td>
+                    <td class="td">4</td><td class="td">8</td><td class="td">80 kg</td>
+                    <td class="td actions"><button class="mini" aria-label="Edit Bench Press">✎</button><button class="mini" aria-label="Delete Bench Press">✕</button></td>
+                  </tr>
+                  <tr>
+                    <td class="td exercise"><strong>Squats</strong><small>Legs</small></td>
+                    <td class="td">5</td><td class="td">6</td><td class="td">110 kg</td>
+                    <td class="td actions"><button class="mini" aria-label="Edit Squats">✎</button><button class="mini" aria-label="Delete Squats">✕</button></td>
+                  </tr>
+                  <tr>
+                    <td class="td exercise"><strong>Deadlift</strong><small>Back</small></td>
+                    <td class="td">3</td><td class="td">5</td><td class="td">145 kg</td>
+                    <td class="td actions"><button class="mini" aria-label="Edit Deadlift">✎</button><button class="mini" aria-label="Delete Deadlift">✕</button></td>
+                  </tr>
+                  <tr>
+                    <td class="td exercise"><strong>Pull-Ups</strong><small>Back</small></td>
+                    <td class="td">4</td><td class="td">10</td><td class="td">10 kg</td>
+                    <td class="td actions"><button class="mini" aria-label="Edit Pull-Ups">✎</button><button class="mini" aria-label="Delete Pull-Ups">✕</button></td>
+                  </tr>
+                  <tr>
+                    <td class="td exercise"><strong>Shoulder Press</strong><small>Shoulders</small></td>
+                    <td class="td">4</td><td class="td">8</td><td class="td">45 kg</td>
+                    <td class="td actions"><button class="mini" aria-label="Edit Shoulder Press">✎</button><button class="mini" aria-label="Delete Shoulder Press">✕</button></td>
+                  </tr>
+                  <tr>
+                    <td class="td exercise"><strong>Bicep Curls</strong><small>Arms</small></td>
+                    <td class="td">3</td><td class="td">12</td><td class="td">16 kg</td>
+                    <td class="td actions"><button class="mini" aria-label="Edit Bicep Curls">✎</button><button class="mini" aria-label="Delete Bicep Curls">✕</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <div class="pr-banner">
+          <div class="pr-lead">
+            <div class="pr-badge">★</div>
+            <div>
+              <p class="pr-eyebrow">Personal Record</p>
+              <h3 class="pr-heading">Deadlift Is Your Strongest Lift</h3>
+            </div>
+          </div>
+          <div class="pr-stats">
+            <div><div class="pr-v">Deadlift</div><div class="pr-k">Best Exercise</div></div>
+            <div><div class="pr-v">145 kg</div><div class="pr-k">Max Weight</div></div>
+            <div><div class="pr-v text-ember">+12.5%</div><div class="pr-k">Monthly Gain</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories -->
+      <section class="wrap section" id="exercises">
+        <p class="kicker">Exercise Library</p>
+        <h2 class="section-title">Browse By Category</h2>
+        <p class="section-sub">
+          Every movement, organized by muscle group, so your next exercise is always one tap away.
+        </p>
+        <div class="category-grid">
+          <article class="category-card">
+            <img src="/images/cat-dumbbells.jpg" alt="Dumbbells on a rack in a bright gym" width="800" height="600" loading="lazy" />
+            <div class="category-body"><h3 class="category-name">Arms</h3><p class="category-meta">24 movements · curls, extensions, carries</p></div>
+          </article>
+          <article class="category-card">
+            <img src="/images/cat-barbell.jpg" alt="Athlete pressing a barbell overhead" width="800" height="600" loading="lazy" />
+            <div class="category-body"><h3 class="category-name">Shoulders</h3><p class="category-meta">18 movements · presses, raises, rows</p></div>
+          </article>
+          <article class="category-card">
+            <img src="/images/cat-floor.jpg" alt="Open gym floor with natural light and plants" width="800" height="600" loading="lazy" />
+            <div class="category-body"><h3 class="category-name">Mobility</h3><p class="category-meta">21 movements · flows, stretches, warm-ups</p></div>
+          </article>
+          <article class="category-card">
+            <img src="/images/cat-rack.jpg" alt="Squat rack loaded with plates" width="800" height="600" loading="lazy" />
+            <div class="category-body"><h3 class="category-name">Legs</h3><p class="category-meta">26 movements · squats, hinges, lunges</p></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="wrap section" id="about">
+        <p class="kicker">About</p>
+        <h2 class="section-title">Built For Lifters Who Keep Score</h2>
+        <p class="section-sub">
+          FitTrack keeps training simple: log the set, watch the numbers move, and let consistency
+          do the rest. No clutter, no distractions — just the data that makes you stronger.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="wrap section" id="faq">
+        <p class="kicker">FAQ</p>
+        <h2 class="section-title">Questions, Answered</h2>
+        <div class="faq-grid">
+          <details class="card" open>
+            <summary class="faq-summary">Is FitTrack free to start?</summary>
+            <p class="faq-answer">Yes. Log unlimited workouts on the free plan, forever. Upgrade only if you want advanced analytics.</p>
+          </details>
+          <details class="card">
+            <summary class="faq-summary">Can I build my own routines?</summary>
+            <p class="faq-answer">Absolutely. Create splits, save templates, and reuse them with one tap on training day.</p>
+          </details>
+          <details class="card">
+            <summary class="faq-summary">Does it track personal records automatically?</summary>
+            <p class="faq-answer">Every logged set is checked against your history, so PRs are detected and celebrated for you.</p>
+          </details>
+          <details class="card">
+            <summary class="faq-summary">Does it work on my phone?</summary>
+            <p class="faq-answer">FitTrack is fully responsive and made to be used one-handed between sets.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="wrap section" id="contact">
+        <div class="cta-banner">
+          <h2 class="cta-title">Start Your Streak Today</h2>
+          <p class="cta-sub">
+            Join thousands of lifters tracking every rep and turning effort into visible progress.
+          </p>
+          <a class="btn-ghost btn-lg" href="#top">Create Free Account</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-col">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">◧</span>
+          <span class="brand-name">FitTrack</span>
+        </div>
+        <p class="footer-tag">Track every rep. Reach every goal.</p>
+        <p class="footer-copy">© 2026 FitTrack. All rights reserved.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Product</h4>
+        <ul class="footer-links">
+          <li><a href="#workouts">Workouts</a></li>
+          <li><a href="#progress">Progress</a></li>
+          <li><a href="#exercises">Exercise Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Company</h4>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
