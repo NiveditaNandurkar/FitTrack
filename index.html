@@ -1,412 +1,1044 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FitTrack — Track Every Rep. Reach Every Goal.</title>
-    <meta
-      name="description"
-      content="FitTrack is a premium workout tracker for logging exercises, monitoring strength, and building consistent training habits."
-    />
-    <meta property="og:title" content="FitTrack — Track Every Rep. Reach Every Goal." />
-    <meta
-      property="og:description"
-      content="Log workouts, monitor strength, build habits, and see the progress that keeps you moving."
-    />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body id="top">
-    <!-- Header -->
-    <header class="site-header">
-      <nav class="site-nav" aria-label="Primary">
-        <a class="brand" href="#top">
-          <span class="brand-mark" aria-hidden="true">◧</span>
-          <span class="brand-name">FitTrack</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="#top">Home</a></li>
-          <li><a href="#workouts">Workouts</a></li>
-          <li><a href="#progress">Progress</a></li>
-          <li><a href="#exercises">Exercises</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="nav-actions">
-          <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
-          <a class="btn-ghost" href="#contact">Login</a>
-          <a class="btn-primary" href="#contact">Join Now</a>
-        </div>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <main>
-      <!-- Hero -->
-      <section class="hero">
-        <p class="eyebrow">Train smart. Stay consistent.</p>
-        <h1 class="hero-title">
-          Track Every Rep.<br />
-          Reach Every <span class="text-forest">Goal.</span>
-        </h1>
-        <p class="hero-sub">
-          Log workouts, monitor strength, build habits, and see the progress that keeps you moving.
+  <title>FitTrack — Track Every Rep. Reach Every Goal.</title>
+        <link rel="stylesheet" href="src/output.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: "#2d6a4f",
+            "forest-dark": "#1f4d39",
+            "forest-soft": "#e6efe9",
+            ember: "#ea580c",
+            sand: "#f4f5f1",
+            ink: "#1c2321",
+            muted: "#6b7671",
+            line: "#e3e6df"
+          },
+          fontFamily: {
+            display: ["Bebas Neue", "Arial Narrow", "sans-serif"],
+            body: ["Inter", "system-ui", "sans-serif"],
+            mono: ["JetBrains Mono", "ui-monospace", "monospace"]
+          },
+          boxShadow: {
+            soft: "0 8px 30px -12px rgba(45,106,79,0.18)"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body id="top"
+      class="m-0 bg-sand text-ink font-body leading-relaxed antialiased">
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-3 z-50 px-4">
+  <nav class="max-w-[1200px] mx-auto flex items-center justify-between gap-4
+              border border-line rounded-full bg-white/90 backdrop-blur-[10px]
+              px-3 py-2.5 shadow-soft">
+
+    <a href="#top" class="flex items-center gap-2.5 pl-1">
+      <span class="grid place-items-center w-9 h-9 rounded-[11px]
+                   bg-forest text-white">
+        ◧
+      </span>
+
+      <span class="font-display text-2xl tracking-wider">
+        FitTrack
+      </span>
+    </a>
+
+    <ul class="hidden lg:flex gap-6 text-[0.95rem] text-muted">
+      <li><a href="#top" class="hover:text-forest">Home</a></li>
+      <li><a href="#workouts" class="hover:text-forest">Workouts</a></li>
+      <li><a href="#progress" class="hover:text-forest">Progress</a></li>
+      <li><a href="#exercises" class="hover:text-forest">Exercises</a></li>
+      <li><a href="#about" class="hover:text-forest">About</a></li>
+      <li><a href="#faq" class="hover:text-forest">FAQ</a></li>
+      <li><a href="#contact" class="hover:text-forest">Contact</a></li>
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <button
+        class="grid place-items-center w-[38px] h-[38px] rounded-full
+               border border-line bg-white cursor-pointer">
+        ☾
+      </button>
+
+      <a href="#contact"
+         class="hidden sm:inline-flex items-center justify-center
+                rounded-full border border-line bg-white px-[1.15rem] py-2
+                font-semibold text-[0.92rem] hover:bg-forest-soft">
+        Login
+      </a>
+
+      <a href="#contact"
+         class="inline-flex items-center justify-center rounded-full
+                bg-forest text-white px-[1.15rem] py-2 font-semibold
+                text-[0.92rem] hover:bg-forest-dark">
+        Join Now
+      </a>
+    </div>
+  </nav>
+</header>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto
+                py-20 sm:py-24 text-center">
+
+  <p class="inline-flex items-center gap-2 border border-line bg-white
+            rounded-full px-4 py-1.5 font-mono text-[0.72rem]
+            uppercase tracking-[0.18em] text-muted">
+    <span class="w-[7px] h-[7px] rounded-full bg-forest"></span>
+    Train smart. Stay consistent.
+  </p>
+
+  <h1 class="font-display uppercase text-[clamp(2.8rem,8vw,5.6rem)]
+             leading-[0.95] mt-6">
+    Track Every Rep.<br>
+    Reach Every <span class="text-forest">Goal.</span>
+  </h1>
+
+  <p class="max-w-[34rem] mx-auto mt-5 text-[1.05rem] text-muted">
+    Log workouts, monitor strength, build habits, and see the progress
+    that keeps you moving.
+  </p>
+
+  <!-- Quick Form -->
+  <form action="#workouts"
+        class="max-w-[920px] mx-auto mt-10 grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr_auto]
+               items-end gap-4 border border-line bg-white rounded-[26px]
+               p-5 text-left shadow-soft">
+
+    <div>
+      <label class="block font-mono text-[0.66rem] tracking-[0.14em]
+                    uppercase text-muted mb-1.5">
+        Workout type
+      </label>
+
+      <select class="w-full border border-line rounded-full px-4 py-2.5
+                     bg-white text-[0.95rem] focus:outline-none
+                     focus:ring-2 focus:ring-forest">
+        <option>Strength Training</option>
+        <option>Hypertrophy</option>
+        <option>Conditioning</option>
+        <option>Mobility</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block font-mono text-[0.66rem] tracking-[0.14em]
+                    uppercase text-muted mb-1.5">
+        Exercise
+      </label>
+
+      <input type="text" value="Bench Press"
+             class="w-full border border-line rounded-full px-4 py-2.5
+                    bg-white focus:outline-none focus:ring-2
+                    focus:ring-forest">
+    </div>
+
+    <div>
+      <label class="block font-mono text-[0.66rem] tracking-[0.14em]
+                    uppercase text-muted mb-1.5">
+        Training date
+      </label>
+
+      <input type="date" value="2026-08-16"
+             class="w-full border border-line rounded-full px-4 py-2.5
+                    bg-white focus:outline-none focus:ring-2
+                    focus:ring-forest">
+    </div>
+
+    <button type="submit"
+            class="rounded-full bg-forest text-white px-6 py-3
+                   font-semibold hover:bg-forest-dark">
+      Start Workout
+    </button>
+  </form>
+
+  <div class="flex flex-wrap justify-center gap-3 mt-8">
+    <a href="#workouts"
+       class="rounded-full bg-forest text-white px-6 py-3
+              font-semibold hover:bg-forest-dark">
+      Log Workout
+    </a>
+
+    <a href="#progress"
+       class="rounded-full border border-line bg-white px-6 py-3
+              font-semibold hover:bg-forest-soft">
+      View Progress
+    </a>
+  </div>
+</section>
+
+
+<!-- ================= TICKER ================= -->
+<div class="overflow-hidden border-y border-line bg-white/55 py-3">
+  <div class="flex gap-12 w-max whitespace-nowrap font-mono
+              text-sm font-bold text-muted">
+    <span>★ New Personal Record</span>
+    <span class="text-ember">⚡ 684 Calories Burned Today</span>
+    <span>⇄ 28 Sets Completed</span>
+    <span>▲ Consistency Builds Strength</span>
+    <span class="text-ember">▲ 12 Day Streak</span>
+    <span>★ New Personal Record</span>
+    <span class="text-ember">⚡ 684 Calories Burned Today</span>
+    <span>⇄ 28 Sets Completed</span>
+    <span>▲ Consistency Builds Strength</span>
+    <span class="text-ember">▲ 12 Day Streak</span>
+  </div>
+</div>
+
+
+<!-- ================= LIFETIME STATS ================= -->
+<div class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto">
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5
+              gap-4 mt-8 border border-line bg-white rounded-[26px]
+              p-8 text-center shadow-soft">
+
+    <div>
+      <div class="font-mono text-2xl font-bold text-forest">639</div>
+      <div class="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+        Total Workouts
+      </div>
+    </div>
+
+    <div>
+      <div class="font-mono text-2xl font-bold text-forest">201,275</div>
+      <div class="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+        Total Reps
+      </div>
+    </div>
+
+    <div>
+      <div class="font-mono text-2xl font-bold text-forest">44,294 kcal</div>
+      <div class="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+        Calories Burned
+      </div>
+    </div>
+
+    <div>
+      <div class="font-mono text-2xl font-bold text-forest">6 days</div>
+      <div class="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+        Active Streak
+      </div>
+    </div>
+
+    <div>
+      <div class="font-mono text-2xl font-bold text-forest">17</div>
+      <div class="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+        Personal Records
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ================= DASHBOARD ================= -->
+<section id="progress"
+         class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto pt-[4.5rem]">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-forest">
+    Dashboard
+  </p>
+
+  <h2 class="font-display uppercase text-[clamp(2rem,5vw,3rem)]
+             leading-tight mt-2">
+    Today's Overview
+  </h2>
+
+  <p class="text-muted max-w-[40rem] mb-8">
+    A live snapshot of your training day — updated as you log each set.
+  </p>
+
+
+  <!-- Metrics -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6">
+      <div class="grid place-items-center w-10 h-10 rounded-xl
+                  bg-[#fdece1] text-ember mb-4">
+        ⚡
+      </div>
+      <div class="text-[1.9rem] font-bold">684</div>
+      <div class="text-muted text-[0.92rem]">Calories Burned</div>
+      <div class="mt-3 font-mono text-xs text-ember">▲ +8% vs avg</div>
+    </article>
+
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6">
+      <div class="grid place-items-center w-10 h-10 rounded-xl
+                  bg-forest-soft text-forest mb-4">
+        ⇄
+      </div>
+      <div class="text-[1.9rem] font-bold">28</div>
+      <div class="text-muted text-[0.92rem]">Total Sets</div>
+      <div class="mt-3 font-mono text-xs text-muted">▲ +3 sets</div>
+    </article>
+
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6">
+      <div class="grid place-items-center w-10 h-10 rounded-xl
+                  bg-forest-soft text-forest mb-4">
+        ◎
+      </div>
+      <div class="text-[1.9rem] font-bold">342</div>
+      <div class="text-muted text-[0.92rem]">Total Reps</div>
+      <div class="mt-3 font-mono text-xs text-muted">▲ +11% this week</div>
+    </article>
+
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6">
+      <div class="grid place-items-center w-10 h-10 rounded-xl
+                  bg-forest-soft text-forest mb-4">
+        ◷
+      </div>
+      <div class="text-[1.9rem] font-bold">54m</div>
+      <div class="text-muted text-[0.92rem]">Workout Duration</div>
+      <div class="mt-3 font-mono text-xs text-muted">▲ on pace</div>
+    </article>
+
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6">
+      <div class="grid place-items-center w-10 h-10 rounded-xl
+                  bg-[#fdece1] text-ember mb-4">
+        ▲
+      </div>
+      <div class="text-[1.9rem] font-bold">12</div>
+      <div class="text-muted text-[0.92rem]">Current Streak</div>
+      <div class="mt-3 font-mono text-xs text-ember">▲ personal best</div>
+    </article>
+
+  </div>
+
+
+  <!-- Progress + Chart -->
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.7fr] gap-4 mt-4">
+
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6 text-center">
+
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+        Today
+      </p>
+
+      <div class="w-[180px] h-[180px] mx-auto my-5 rounded-full
+                  grid place-items-center
+                  [background:conic-gradient(#2d6a4f_0_78%,#e8ece6_78%_100%)]">
+
+        <div class="w-[152px] h-[152px] rounded-full bg-white
+                    grid place-items-center">
+          <div>
+            <strong class="block text-3xl">78%</strong>
+            <span class="font-mono text-[0.66rem] tracking-[0.16em] text-muted">
+              Complete
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="font-semibold text-[1.05rem]">
+        Daily Workout Completion
+      </h3>
+
+      <p class="text-sm text-muted">
+        5 of 6 planned exercises finished. One more set of Bicep Curls
+        to hit 100%.
+      </p>
+
+    </article>
+
+
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6">
+
+      <div class="flex items-baseline justify-between gap-4">
+        <h3 class="text-lg font-semibold">Weekly Activity</h3>
+        <span class="text-sm text-muted">Sets logged, Mon – Sun</span>
+      </div>
+
+      <div class="mt-7 grid grid-cols-7 items-end gap-3 h-[220px]">
+
+        <div class="flex flex-col items-center h-full">
+          <div class="flex-1 w-7 rounded-full bg-[#eef1ec] flex items-end overflow-hidden">
+            <div class="w-full bg-gradient-to-b from-forest to-forest-dark rounded-full h-[62%]"></div>
+          </div>
+          <span class="mt-2 font-mono text-xs text-muted">Mon</span>
+        </div>
+
+        <div class="flex flex-col items-center h-full">
+          <div class="flex-1 w-7 rounded-full bg-[#eef1ec] flex items-end overflow-hidden">
+            <div class="w-full bg-gradient-to-b from-forest to-forest-dark rounded-full h-[74%]"></div>
+          </div>
+          <span class="mt-2 font-mono text-xs text-muted">Tue</span>
+        </div>
+
+        <div class="flex flex-col items-center h-full">
+          <div class="flex-1 w-7 rounded-full bg-[#eef1ec] flex items-end overflow-hidden">
+            <div class="w-full bg-gradient-to-b from-forest to-forest-dark rounded-full h-[42%]"></div>
+          </div>
+          <span class="mt-2 font-mono text-xs text-muted">Wed</span>
+        </div>
+
+        <div class="flex flex-col items-center h-full">
+          <div class="flex-1 w-7 rounded-full bg-[#eef1ec] flex items-end overflow-hidden">
+            <div class="w-full bg-gradient-to-b from-forest to-forest-dark rounded-full h-[88%]"></div>
+          </div>
+          <span class="mt-2 font-mono text-xs text-muted">Thu</span>
+        </div>
+
+        <div class="flex flex-col items-center h-full">
+          <div class="flex-1 w-7 rounded-full bg-[#eef1ec] flex items-end overflow-hidden">
+            <div class="w-full bg-gradient-to-b from-forest to-forest-dark rounded-full h-[58%]"></div>
+          </div>
+          <span class="mt-2 font-mono text-xs text-muted">Fri</span>
+        </div>
+
+        <div class="flex flex-col items-center h-full">
+          <div class="flex-1 w-7 rounded-full bg-[#eef1ec] flex items-end overflow-hidden">
+            <div class="w-full bg-ember rounded-full h-full"></div>
+          </div>
+          <span class="mt-2 font-mono text-xs font-bold text-ember">Sat</span>
+        </div>
+
+        <div class="flex flex-col items-center h-full">
+          <div class="flex-1 w-7 rounded-full bg-[#eef1ec] flex items-end overflow-hidden">
+            <div class="w-full bg-gradient-to-b from-forest to-forest-dark rounded-full h-[16%]"></div>
+          </div>
+          <span class="mt-2 font-mono text-xs text-muted">Sun</span>
+        </div>
+
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ================= WORKOUT LOGGER ================= -->
+<section id="workouts"
+         class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto pt-[4.5rem]">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-forest">
+    Log Workout
+  </p>
+
+  <h2 class="font-display uppercase text-[clamp(2rem,5vw,3rem)] mt-2">
+    Add To Today's Session
+  </h2>
+
+  <p class="text-muted max-w-[40rem] mb-8">
+    Record every exercise the moment you finish it — sets, reps,
+    and weight all in one place.
+  </p>
+
+
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-4">
+
+    <!-- Form -->
+    <form class="bg-white border border-line rounded-[18px]
+                 shadow-soft p-6">
+
+      <h3 class="text-lg font-semibold">Exercise Logger</h3>
+
+      <p class="mt-1 mb-5 text-sm text-muted">
+        Fill in the details below to add a new entry.
+      </p>
+
+      <label class="block font-mono text-[0.66rem] uppercase
+                    tracking-[0.14em] text-muted mb-1.5">
+        Exercise name
+      </label>
+
+      <input type="text"
+             placeholder="e.g. Incline Dumbbell Press"
+             class="w-full border border-line rounded-full px-4 py-2.5 mb-4
+                    focus:outline-none focus:ring-2 focus:ring-forest">
+
+
+      <div class="grid grid-cols-2 gap-3 mb-4">
+
+        <div>
+          <label class="block font-mono text-[0.66rem] uppercase
+                        tracking-[0.14em] text-muted mb-1.5">
+            Category
+          </label>
+
+          <select class="w-full border border-line rounded-full
+                         px-4 py-2.5 bg-white">
+            <option>Chest</option>
+            <option>Back</option>
+            <option>Legs</option>
+            <option>Shoulders</option>
+            <option>Arms</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-mono text-[0.66rem] uppercase
+                        tracking-[0.14em] text-muted mb-1.5">
+            Weight (kg)
+          </label>
+
+          <input type="number" placeholder="60"
+                 class="w-full border border-line rounded-full px-4 py-2.5">
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-cols-2 gap-3 mb-4">
+
+        <div>
+          <label class="block font-mono text-[0.66rem] uppercase
+                        tracking-[0.14em] text-muted mb-1.5">
+            Sets
+          </label>
+
+          <input type="number" placeholder="4"
+                 class="w-full border border-line rounded-full px-4 py-2.5">
+        </div>
+
+        <div>
+          <label class="block font-mono text-[0.66rem] uppercase
+                        tracking-[0.14em] text-muted mb-1.5">
+            Reps
+          </label>
+
+          <input type="number" placeholder="10"
+                 class="w-full border border-line rounded-full px-4 py-2.5">
+        </div>
+
+      </div>
+
+
+      <label class="block font-mono text-[0.66rem] uppercase
+                    tracking-[0.14em] text-muted mb-1.5">
+        Duration (min)
+      </label>
+
+      <input type="number" placeholder="12"
+             class="w-full border border-line rounded-full px-4 py-2.5 mb-4">
+
+
+      <label class="block font-mono text-[0.66rem] uppercase
+                    tracking-[0.14em] text-muted mb-1.5">
+        Notes
+      </label>
+
+      <textarea
+        placeholder="How did it feel? Any form cues to remember."
+        class="w-full min-h-[84px] resize-y border border-line
+               rounded-2xl px-4 py-3 mb-4"></textarea>
+
+
+      <button type="submit"
+              class="w-full rounded-full bg-forest text-white
+                     px-6 py-3 font-semibold hover:bg-forest-dark">
+        Add Exercise
+      </button>
+
+    </form>
+
+
+    <!-- Workout Table -->
+    <article class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6 overflow-hidden">
+
+      <div class="flex flex-wrap items-center justify-between
+                  gap-4 mb-5">
+
+        <h3 class="text-lg font-semibold">Today's Workout</h3>
+
+        <span class="rounded-full bg-forest-soft px-3.5 py-1.5
+                     font-mono text-xs text-forest-dark">
+          Sun, 16 Aug · Upper &amp; Lower Split
+        </span>
+
+      </div>
+
+      <div class="overflow-x-auto">
+
+        <table class="w-full border-collapse">
+
+          <thead>
+            <tr>
+              <th class="text-left font-mono text-[0.66rem]
+                         uppercase tracking-[0.14em] text-muted
+                         font-medium pb-3 border-b border-line">
+                Exercise
+              </th>
+
+              <th class="text-left font-mono text-[0.66rem]
+                         uppercase tracking-[0.14em] text-muted
+                         font-medium pb-3 border-b border-line">
+                Sets
+              </th>
+
+              <th class="text-left font-mono text-[0.66rem]
+                         uppercase tracking-[0.14em] text-muted
+                         font-medium pb-3 border-b border-line">
+                Reps
+              </th>
+
+              <th class="text-left font-mono text-[0.66rem]
+                         uppercase tracking-[0.14em] text-muted
+                         font-medium pb-3 border-b border-line">
+                Weight
+              </th>
+
+              <th class="text-right font-mono text-[0.66rem]
+                         uppercase tracking-[0.14em] text-muted
+                         font-medium pb-3 border-b border-line">
+                Actions
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td class="py-4 border-b border-line">
+                <strong class="block">● Bench Press</strong>
+                <small class="text-muted">Chest</small>
+              </td>
+              <td class="py-4 border-b border-line font-mono">4</td>
+              <td class="py-4 border-b border-line font-mono">8</td>
+              <td class="py-4 border-b border-line font-mono">80 kg</td>
+              <td class="py-4 border-b border-line text-right">
+                ✎ ✕
+              </td>
+            </tr>
+
+            <tr>
+              <td class="py-4 border-b border-line">
+                <strong class="block">● Squats</strong>
+                <small class="text-muted">Legs</small>
+              </td>
+              <td class="py-4 border-b border-line font-mono">5</td>
+              <td class="py-4 border-b border-line font-mono">6</td>
+              <td class="py-4 border-b border-line font-mono">110 kg</td>
+              <td class="py-4 border-b border-line text-right">
+                ✎ ✕
+              </td>
+            </tr>
+
+            <tr>
+              <td class="py-4 border-b border-line">
+                <strong class="block">● Deadlift</strong>
+                <small class="text-muted">Back</small>
+              </td>
+              <td class="py-4 border-b border-line font-mono">3</td>
+              <td class="py-4 border-b border-line font-mono">5</td>
+              <td class="py-4 border-b border-line font-mono">145 kg</td>
+              <td class="py-4 border-b border-line text-right">
+                ✎ ✕
+              </td>
+            </tr>
+
+            <tr>
+              <td class="py-4 border-b border-line">
+                <strong class="block">● Pull-Ups</strong>
+                <small class="text-muted">Back</small>
+              </td>
+              <td class="py-4 border-b border-line font-mono">4</td>
+              <td class="py-4 border-b border-line font-mono">10</td>
+              <td class="py-4 border-b border-line font-mono">10 kg</td>
+              <td class="py-4 border-b border-line text-right">
+                ✎ ✕
+              </td>
+            </tr>
+
+            <tr>
+              <td class="py-4 border-b border-line">
+                <strong class="block">● Shoulder Press</strong>
+                <small class="text-muted">Shoulders</small>
+              </td>
+              <td class="py-4 border-b border-line font-mono">4</td>
+              <td class="py-4 border-b border-line font-mono">8</td>
+              <td class="py-4 border-b border-line font-mono">45 kg</td>
+              <td class="py-4 border-b border-line text-right">
+                ✎ ✕
+              </td>
+            </tr>
+
+            <tr>
+              <td class="py-4">
+                <strong class="block">● Bicep Curls</strong>
+                <small class="text-muted">Arms</small>
+              </td>
+              <td class="py-4 font-mono">3</td>
+              <td class="py-4 font-mono">12</td>
+              <td class="py-4 font-mono">16 kg</td>
+              <td class="py-4 text-right">
+                ✎ ✕
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+    </article>
+  </div>
+
+
+  <!-- PR Banner -->
+  <div class="mt-6 flex flex-wrap items-center justify-between
+              gap-8 border border-[#d3e2d8] bg-forest-soft
+              rounded-[22px] p-6">
+
+    <div class="flex items-center gap-4">
+
+      <div class="grid place-items-center w-14 h-14 rounded-2xl
+                  bg-white text-2xl">
+        ★
+      </div>
+
+      <div>
+        <p class="font-mono text-[0.68rem] uppercase
+                  tracking-[0.2em] text-muted">
+          Personal Record
         </p>
 
-        <form class="quick-form" action="#workouts">
-          <div class="field">
-            <label class="field-label" for="type">Workout type</label>
-            <select class="field-input" id="type" name="type">
-              <option>Strength Training</option>
-              <option>Hypertrophy</option>
-              <option>Conditioning</option>
-              <option>Mobility</option>
-            </select>
-          </div>
-          <div class="field">
-            <label class="field-label" for="exercise">Exercise</label>
-            <input class="field-input" id="exercise" name="exercise" type="text" value="Bench Press" />
-          </div>
-          <div class="field">
-            <label class="field-label" for="date">Training date</label>
-            <input class="field-input" id="date" name="date" type="date" value="2026-08-16" />
-          </div>
-          <button class="btn-primary btn-lg" type="submit">Start Workout</button>
-        </form>
+        <h3 class="text-xl font-semibold">
+          Deadlift Is Your Strongest Lift
+        </h3>
+      </div>
+    </div>
 
-        <div class="hero-ctas">
-          <a class="btn-primary btn-lg" href="#workouts">Log Workout</a>
-          <a class="btn-ghost btn-lg" href="#progress">View Progress</a>
-        </div>
-      </section>
 
-      <!-- Ticker -->
-      <div class="ticker" aria-hidden="true">
-        <div class="ticker-track">
-          <span>★ New Personal Record</span>
-          <span class="text-ember">⚡ 684 Calories Burned Today</span>
-          <span>⇄ 28 Sets Completed</span>
-          <span>▲ Consistency Builds Strength</span>
-          <span class="text-ember">▲ 12 Day Streak</span>
-          <span>★ New Personal Record</span>
-          <span class="text-ember">⚡ 684 Calories Burned Today</span>
-          <span>⇄ 28 Sets Completed</span>
-          <span>▲ Consistency Builds Strength</span>
-          <span class="text-ember">▲ 12 Day Streak</span>
+    <div class="flex flex-wrap gap-10">
+
+      <div>
+        <div class="text-lg font-bold">Deadlift</div>
+        <div class="font-mono text-[0.68rem] uppercase text-muted">
+          Best Exercise
         </div>
       </div>
 
-      <!-- Lifetime stats -->
-      <div class="wrap">
-        <div class="lifetime-stats">
-          <div><div class="stat-value">639</div><div class="stat-label">Total Workouts</div></div>
-          <div><div class="stat-value">201,275</div><div class="stat-label">Total Reps</div></div>
-          <div><div class="stat-value">44,294 kcal</div><div class="stat-label">Calories Burned</div></div>
-          <div><div class="stat-value">6 days</div><div class="stat-label">Active Streak</div></div>
-          <div><div class="stat-value">17</div><div class="stat-label">Personal Records</div></div>
+      <div>
+        <div class="text-lg font-bold">145 kg</div>
+        <div class="font-mono text-[0.68rem] uppercase text-muted">
+          Max Weight
         </div>
       </div>
 
-      <!-- Dashboard -->
-      <section class="wrap section" id="progress">
-        <p class="kicker">Dashboard</p>
-        <h2 class="section-title">Today's Overview</h2>
-        <p class="section-sub">A live snapshot of your training day — updated as you log each set.</p>
-
-        <div class="metric-grid">
-          <article class="card">
-            <div class="chip-ember">⚡</div>
-            <div class="metric-value">684</div>
-            <div class="metric-label">Calories Burned</div>
-            <div class="metric-trend text-ember">▲ +8% vs avg</div>
-          </article>
-          <article class="card">
-            <div class="chip-green">⇄</div>
-            <div class="metric-value">28</div>
-            <div class="metric-label">Total Sets</div>
-            <div class="metric-trend text-muted">▲ +3 sets</div>
-          </article>
-          <article class="card">
-            <div class="chip-green">◎</div>
-            <div class="metric-value">342</div>
-            <div class="metric-label">Total Reps</div>
-            <div class="metric-trend text-muted">▲ +11% this week</div>
-          </article>
-          <article class="card">
-            <div class="chip-green">◷</div>
-            <div class="metric-value">54m</div>
-            <div class="metric-label">Workout Duration</div>
-            <div class="metric-trend text-muted">▲ on pace</div>
-          </article>
-          <article class="card">
-            <div class="chip-ember">▲</div>
-            <div class="metric-value">12</div>
-            <div class="metric-label">Current Streak</div>
-            <div class="metric-trend text-ember">▲ personal best</div>
-          </article>
+      <div>
+        <div class="text-lg font-bold text-ember">+12.5%</div>
+        <div class="font-mono text-[0.68rem] uppercase text-muted">
+          Monthly Gain
         </div>
+      </div>
 
-        <div class="split-2">
-          <article class="card center">
-            <p class="day-label">Today</p>
-            <div class="ring" role="img" aria-label="78 percent of today's workout complete">
-              <div class="ring-inner">
-                <strong class="ring-pct">78%</strong>
-                <span class="ring-cap">Complete</span>
-              </div>
-            </div>
-            <h3 class="ring-title">Daily Workout Completion</h3>
-            <p class="ring-desc">
-              5 of 6 planned exercises finished. One more set of Bicep Curls to hit 100%.
-            </p>
-          </article>
+    </div>
+  </div>
 
-          <article class="card">
-            <div class="chart-head">
-              <h3 class="chart-title">Weekly Activity</h3>
-              <span class="chart-sub">Sets logged, Mon – Sun</span>
-            </div>
-            <div class="bars">
-              <div class="bar"><div class="track"><div class="fill" style="height: 62%"></div></div><div class="day">Mon</div></div>
-              <div class="bar"><div class="track"><div class="fill" style="height: 74%"></div></div><div class="day">Tue</div></div>
-              <div class="bar"><div class="track"><div class="fill" style="height: 42%"></div></div><div class="day">Wed</div></div>
-              <div class="bar"><div class="track"><div class="fill" style="height: 88%"></div></div><div class="day">Thu</div></div>
-              <div class="bar"><div class="track"><div class="fill" style="height: 58%"></div></div><div class="day">Fri</div></div>
-              <div class="bar peak"><div class="track"><div class="fill" style="height: 100%"></div></div><div class="day">Sat</div></div>
-              <div class="bar"><div class="track"><div class="fill" style="height: 16%"></div></div><div class="day">Sun</div></div>
-            </div>
-          </article>
-        </div>
-      </section>
+</section>
 
-      <!-- Logger -->
-      <section class="wrap section" id="workouts">
-        <p class="kicker">Log Workout</p>
-        <h2 class="section-title">Add To Today's Session</h2>
-        <p class="section-sub">
-          Record every exercise the moment you finish it — sets, reps, and weight all in one place.
+
+<!-- ================= EXERCISES ================= -->
+<section id="exercises"
+         class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto pt-[4.5rem]">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-forest">
+    Exercise Library
+  </p>
+
+  <h2 class="font-display uppercase text-[clamp(2rem,5vw,3rem)] mt-2">
+    Browse By Category
+  </h2>
+
+  <p class="text-muted max-w-[40rem] mb-8">
+    Every movement, organized by muscle group, so your next exercise
+    is always one tap away.
+  </p>
+
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+    <article class="overflow-hidden border border-line bg-white
+                    rounded-[18px] shadow-soft">
+
+      <img src="/images/cat-dumbbells.jpg"
+           alt="Dumbbells on a rack"
+           class="h-52 w-full object-cover hover:scale-105
+                  transition-transform duration-300">
+
+      <div class="p-5">
+        <h3 class="font-display text-2xl uppercase">Arms</h3>
+        <p class="text-sm text-muted">
+          24 movements · curls, extensions, carries
         </p>
+      </div>
 
-        <div class="split-logger">
-          <form class="card">
-            <h3 class="form-title">Exercise Logger</h3>
-            <p class="form-sub">Fill in the details below to add a new entry.</p>
+    </article>
 
-            <div class="field-block">
-              <label class="field-label" for="name">Exercise name</label>
-              <input class="field-input" id="name" type="text" placeholder="e.g. Incline Dumbbell Press" />
-            </div>
-            <div class="field-row">
-              <div class="field-block">
-                <label class="field-label" for="category">Category</label>
-                <select class="field-input" id="category">
-                  <option>Chest</option>
-                  <option>Back</option>
-                  <option>Legs</option>
-                  <option>Shoulders</option>
-                  <option>Arms</option>
-                </select>
-              </div>
-              <div class="field-block">
-                <label class="field-label" for="weight">Weight (kg)</label>
-                <input class="field-input" id="weight" type="number" placeholder="60" />
-              </div>
-            </div>
-            <div class="field-row">
-              <div class="field-block">
-                <label class="field-label" for="sets">Sets</label>
-                <input class="field-input" id="sets" type="number" placeholder="4" />
-              </div>
-              <div class="field-block">
-                <label class="field-label" for="reps">Reps</label>
-                <input class="field-input" id="reps" type="number" placeholder="10" />
-              </div>
-            </div>
-            <div class="field-block">
-              <label class="field-label" for="duration">Duration (min)</label>
-              <input class="field-input" id="duration" type="number" placeholder="12" />
-            </div>
-            <div class="field-block">
-              <label class="field-label" for="notes">Notes</label>
-              <textarea class="field-input textarea" id="notes" placeholder="How did it feel? Any form cues to remember."></textarea>
-            </div>
-            <button class="btn-primary btn-lg btn-block" type="submit">Add Exercise</button>
-          </form>
 
-          <article class="card table-card">
-            <div class="table-head">
-              <h3 class="table-title">Today's Workout</h3>
-              <span class="table-tag">Sun, 16 Aug · Upper &amp; Lower Split</span>
-            </div>
-            <div class="table-scroll">
-              <table class="workout-table">
-                <thead>
-                  <tr>
-                    <th class="th">Exercise</th>
-                    <th class="th">Sets</th>
-                    <th class="th">Reps</th>
-                    <th class="th">Weight</th>
-                    <th class="th th-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="td exercise"><strong>Bench Press</strong><small>Chest</small></td>
-                    <td class="td">4</td><td class="td">8</td><td class="td">80 kg</td>
-                    <td class="td actions"><button class="mini" aria-label="Edit Bench Press">✎</button><button class="mini" aria-label="Delete Bench Press">✕</button></td>
-                  </tr>
-                  <tr>
-                    <td class="td exercise"><strong>Squats</strong><small>Legs</small></td>
-                    <td class="td">5</td><td class="td">6</td><td class="td">110 kg</td>
-                    <td class="td actions"><button class="mini" aria-label="Edit Squats">✎</button><button class="mini" aria-label="Delete Squats">✕</button></td>
-                  </tr>
-                  <tr>
-                    <td class="td exercise"><strong>Deadlift</strong><small>Back</small></td>
-                    <td class="td">3</td><td class="td">5</td><td class="td">145 kg</td>
-                    <td class="td actions"><button class="mini" aria-label="Edit Deadlift">✎</button><button class="mini" aria-label="Delete Deadlift">✕</button></td>
-                  </tr>
-                  <tr>
-                    <td class="td exercise"><strong>Pull-Ups</strong><small>Back</small></td>
-                    <td class="td">4</td><td class="td">10</td><td class="td">10 kg</td>
-                    <td class="td actions"><button class="mini" aria-label="Edit Pull-Ups">✎</button><button class="mini" aria-label="Delete Pull-Ups">✕</button></td>
-                  </tr>
-                  <tr>
-                    <td class="td exercise"><strong>Shoulder Press</strong><small>Shoulders</small></td>
-                    <td class="td">4</td><td class="td">8</td><td class="td">45 kg</td>
-                    <td class="td actions"><button class="mini" aria-label="Edit Shoulder Press">✎</button><button class="mini" aria-label="Delete Shoulder Press">✕</button></td>
-                  </tr>
-                  <tr>
-                    <td class="td exercise"><strong>Bicep Curls</strong><small>Arms</small></td>
-                    <td class="td">3</td><td class="td">12</td><td class="td">16 kg</td>
-                    <td class="td actions"><button class="mini" aria-label="Edit Bicep Curls">✎</button><button class="mini" aria-label="Delete Bicep Curls">✕</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </article>
-        </div>
+    <article class="overflow-hidden border border-line bg-white
+                    rounded-[18px] shadow-soft">
 
-        <div class="pr-banner">
-          <div class="pr-lead">
-            <div class="pr-badge">★</div>
-            <div>
-              <p class="pr-eyebrow">Personal Record</p>
-              <h3 class="pr-heading">Deadlift Is Your Strongest Lift</h3>
-            </div>
-          </div>
-          <div class="pr-stats">
-            <div><div class="pr-v">Deadlift</div><div class="pr-k">Best Exercise</div></div>
-            <div><div class="pr-v">145 kg</div><div class="pr-k">Max Weight</div></div>
-            <div><div class="pr-v text-ember">+12.5%</div><div class="pr-k">Monthly Gain</div></div>
-          </div>
-        </div>
-      </section>
+      <img src="/images/cat-barbell.jpg"
+           alt="Athlete pressing a barbell overhead"
+           class="h-52 w-full object-cover hover:scale-105
+                  transition-transform duration-300">
 
-      <!-- Categories -->
-      <section class="wrap section" id="exercises">
-        <p class="kicker">Exercise Library</p>
-        <h2 class="section-title">Browse By Category</h2>
-        <p class="section-sub">
-          Every movement, organized by muscle group, so your next exercise is always one tap away.
+      <div class="p-5">
+        <h3 class="font-display text-2xl uppercase">Shoulders</h3>
+        <p class="text-sm text-muted">
+          18 movements · presses, raises, rows
         </p>
-        <div class="category-grid">
-          <article class="category-card">
-            <img src="/images/cat-dumbbells.jpg" alt="Dumbbells on a rack in a bright gym" width="800" height="600" loading="lazy" />
-            <div class="category-body"><h3 class="category-name">Arms</h3><p class="category-meta">24 movements · curls, extensions, carries</p></div>
-          </article>
-          <article class="category-card">
-            <img src="/images/cat-barbell.jpg" alt="Athlete pressing a barbell overhead" width="800" height="600" loading="lazy" />
-            <div class="category-body"><h3 class="category-name">Shoulders</h3><p class="category-meta">18 movements · presses, raises, rows</p></div>
-          </article>
-          <article class="category-card">
-            <img src="/images/cat-floor.jpg" alt="Open gym floor with natural light and plants" width="800" height="600" loading="lazy" />
-            <div class="category-body"><h3 class="category-name">Mobility</h3><p class="category-meta">21 movements · flows, stretches, warm-ups</p></div>
-          </article>
-          <article class="category-card">
-            <img src="/images/cat-rack.jpg" alt="Squat rack loaded with plates" width="800" height="600" loading="lazy" />
-            <div class="category-body"><h3 class="category-name">Legs</h3><p class="category-meta">26 movements · squats, hinges, lunges</p></div>
-          </article>
-        </div>
-      </section>
+      </div>
 
-      <!-- About -->
-      <section class="wrap section" id="about">
-        <p class="kicker">About</p>
-        <h2 class="section-title">Built For Lifters Who Keep Score</h2>
-        <p class="section-sub">
-          FitTrack keeps training simple: log the set, watch the numbers move, and let consistency
-          do the rest. No clutter, no distractions — just the data that makes you stronger.
+    </article>
+
+
+    <article class="overflow-hidden border border-line bg-white
+                    rounded-[18px] shadow-soft">
+
+      <img src="/images/cat-floor.jpg"
+           alt="Open gym floor"
+           class="h-52 w-full object-cover hover:scale-105
+                  transition-transform duration-300">
+
+      <div class="p-5">
+        <h3 class="font-display text-2xl uppercase">Mobility</h3>
+        <p class="text-sm text-muted">
+          21 movements · flows, stretches, warm-ups
         </p>
-      </section>
-
-      <!-- FAQ -->
-      <section class="wrap section" id="faq">
-        <p class="kicker">FAQ</p>
-        <h2 class="section-title">Questions, Answered</h2>
-        <div class="faq-grid">
-          <details class="card" open>
-            <summary class="faq-summary">Is FitTrack free to start?</summary>
-            <p class="faq-answer">Yes. Log unlimited workouts on the free plan, forever. Upgrade only if you want advanced analytics.</p>
-          </details>
-          <details class="card">
-            <summary class="faq-summary">Can I build my own routines?</summary>
-            <p class="faq-answer">Absolutely. Create splits, save templates, and reuse them with one tap on training day.</p>
-          </details>
-          <details class="card">
-            <summary class="faq-summary">Does it track personal records automatically?</summary>
-            <p class="faq-answer">Every logged set is checked against your history, so PRs are detected and celebrated for you.</p>
-          </details>
-          <details class="card">
-            <summary class="faq-summary">Does it work on my phone?</summary>
-            <p class="faq-answer">FitTrack is fully responsive and made to be used one-handed between sets.</p>
-          </details>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <section class="wrap section" id="contact">
-        <div class="cta-banner">
-          <h2 class="cta-title">Start Your Streak Today</h2>
-          <p class="cta-sub">
-            Join thousands of lifters tracking every rep and turning effort into visible progress.
-          </p>
-          <a class="btn-ghost btn-lg" href="#top">Create Free Account</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="footer-col">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">◧</span>
-          <span class="brand-name">FitTrack</span>
-        </div>
-        <p class="footer-tag">Track every rep. Reach every goal.</p>
-        <p class="footer-copy">© 2026 FitTrack. All rights reserved.</p>
       </div>
-      <div class="footer-col">
-        <h4 class="footer-heading">Product</h4>
-        <ul class="footer-links">
-          <li><a href="#workouts">Workouts</a></li>
-          <li><a href="#progress">Progress</a></li>
-          <li><a href="#exercises">Exercise Library</a></li>
-        </ul>
+
+    </article>
+
+
+    <article class="overflow-hidden border border-line bg-white
+                    rounded-[18px] shadow-soft">
+
+      <img src="/images/cat-rack.jpg"
+           alt="Squat rack loaded with plates"
+           class="h-52 w-full object-cover hover:scale-105
+                  transition-transform duration-300">
+
+      <div class="p-5">
+        <h3 class="font-display text-2xl uppercase">Legs</h3>
+        <p class="text-sm text-muted">
+          26 movements · squats, hinges, lunges
+        </p>
       </div>
-      <div class="footer-col">
-        <h4 class="footer-heading">Company</h4>
-        <ul class="footer-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+<section id="about"
+         class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto pt-[4.5rem]">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-forest">
+    About
+  </p>
+
+  <h2 class="font-display uppercase text-[clamp(2rem,5vw,3rem)] mt-2">
+    Built For Lifters Who Keep Score
+  </h2>
+
+  <p class="text-muted max-w-[40rem]">
+    FitTrack keeps training simple: log the set, watch the numbers move,
+    and let consistency do the rest. No clutter, no distractions —
+    just the data that makes you stronger.
+  </p>
+
+</section>
+
+
+<!-- ================= FAQ ================= -->
+<section id="faq"
+         class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto pt-[4.5rem]">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-forest">
+    FAQ
+  </p>
+
+  <h2 class="font-display uppercase text-[clamp(2rem,5vw,3rem)] mt-2 mb-6">
+    Questions, Answered
+  </h2>
+
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+    <details open
+             class="bg-white border border-line rounded-[18px]
+                    shadow-soft p-6">
+      <summary class="cursor-pointer font-semibold">
+        Is FitTrack free to start?
+      </summary>
+
+      <p class="mt-2 text-sm text-muted">
+        Yes. Log unlimited workouts on the free plan, forever.
+        Upgrade only if you want advanced analytics.
+      </p>
+    </details>
+
+
+    <details
+      class="bg-white border border-line rounded-[18px]
+             shadow-soft p-6">
+      <summary class="cursor-pointer font-semibold">
+        Can I build my own routines?
+      </summary>
+
+      <p class="mt-2 text-sm text-muted">
+        Absolutely. Create splits, save templates, and reuse them
+        with one tap on training day.
+      </p>
+    </details>
+
+
+    <details
+      class="bg-white border border-line rounded-[18px]
+             shadow-soft p-6">
+      <summary class="cursor-pointer font-semibold">
+        Does it track personal records automatically?
+      </summary>
+
+      <p class="mt-2 text-sm text-muted">
+        Every logged set is checked against your history,
+        so PRs are detected and celebrated for you.
+      </p>
+    </details>
+
+
+    <details
+      class="bg-white border border-line rounded-[18px]
+             shadow-soft p-6">
+      <summary class="cursor-pointer font-semibold">
+        Does it work on my phone?
+      </summary>
+
+      <p class="mt-2 text-sm text-muted">
+        FitTrack is fully responsive and made to be used
+        one-handed between sets.
+      </p>
+    </details>
+
+  </div>
+</section>
+
+
+<!-- ================= CTA ================= -->
+<section id="contact"
+         class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto pt-[4.5rem]">
+
+  <div class="bg-forest rounded-[26px] py-16 px-6
+              text-center text-white shadow-soft">
+
+    <h2 class="font-display uppercase text-[clamp(2rem,5vw,3rem)]">
+      Start Your Streak Today
+    </h2>
+
+    <p class="max-w-[36rem] mx-auto mt-3 text-white/80">
+      Join thousands of lifters tracking every rep and turning
+      effort into visible progress.
+    </p>
+
+    <a href="#top"
+       class="inline-flex mt-7 rounded-full bg-white text-ink
+              px-6 py-3 font-semibold hover:bg-forest-soft">
+      Create Free Account
+    </a>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="w-[calc(100%-2rem)] max-w-[1200px] mx-auto
+               grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+               gap-8 py-16">
+
+  <div>
+
+    <div class="flex items-center gap-2.5">
+
+      <span class="grid place-items-center w-9 h-9 rounded-[11px]
+                   bg-forest text-white">
+        ◧
+      </span>
+
+      <span class="font-display text-2xl tracking-wider">
+        FitTrack
+      </span>
+
+    </div>
+
+    <p class="max-w-xs text-sm text-muted mt-3">
+      Track every rep. Reach every goal.
+    </p>
+
+    <p class="text-sm text-muted mt-2">
+      © 2026 FitTrack. All rights reserved.
+    </p>
+
+  </div>
+
+
+  <div>
+    <h4 class="font-mono text-[0.7rem] uppercase
+               tracking-[0.2em] text-muted">
+      Product
+    </h4>
+
+    <ul class="mt-3 space-y-2 text-[0.95rem]">
+      <li><a href="#workouts" class="hover:text-forest">Workouts</a></li>
+      <li><a href="#progress" class="hover:text-forest">Progress</a></li>
+      <li><a href="#exercises" class="hover:text-forest">
+        Exercise Library
+      </a></li>
+    </ul>
+  </div>
+
+
+  <div>
+    <h4 class="font-mono text-[0.7rem] uppercase
+               tracking-[0.2em] text-muted">
+      Company
+    </h4>
+
+    <ul class="mt-3 space-y-2 text-[0.95rem]">
+      <li><a href="#about" class="hover:text-forest">About</a></li>
+      <li><a href="#faq" class="hover:text-forest">FAQ</a></li>
+      <li><a href="#contact" class="hover:text-forest">Contact</a></li>
+    </ul>
+  </div>
+
+</footer>
+
+</body>
 </html>
