@@ -15,6 +15,7 @@
 
   <script>
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
@@ -39,6 +40,24 @@
       }
     }
   </script>
+  <style>
+    body { transition: background-color .35s ease, color .35s ease; }
+    body.night-mode { background: #243b37; color: #f4f5f1; overflow-x: hidden; }
+    body.night-mode::before, body.night-mode::after {
+      content: ""; position: fixed; z-index: -1; border-radius: 999px; filter: blur(12px);
+      opacity: .42; pointer-events: none; animation: floatGlow 14s ease-in-out infinite alternate;
+    }
+    body.night-mode::before { width: 30rem; height: 30rem; background: #6fa892; top: 12%; left: -10rem; }
+    body.night-mode::after { width: 26rem; height: 26rem; background: #d6a66f; bottom: -9rem; right: -8rem; animation-delay: -6s; }
+    @keyframes floatGlow { from { transform: translate3d(0, 0, 0) scale(.9); } to { transform: translate3d(7rem, -3rem, 0) scale(1.14); } }
+    body.night-mode nav, body.night-mode article, body.night-mode form, body.night-mode details,
+    body.night-mode .bg-white { background-color: rgba(47, 76, 69, .92) !important; }
+    body.night-mode .text-ink, body.night-mode h1, body.night-mode h2, body.night-mode h3,
+    body.night-mode h4, body.night-mode strong { color: #f7f5ec !important; }
+    body.night-mode .text-muted { color: #c6d3cc !important; }
+    body.night-mode .border-line { border-color: rgba(225, 237, 228, .24) !important; }
+    body.night-mode input, body.night-mode select, body.night-mode textarea { background: #36564e; color: #f7f5ec; }
+  </style>
 </head>
 
 <body id="top"
@@ -72,20 +91,20 @@
     </ul>
 
     <div class="flex items-center gap-2">
-      <button
+      <button id="theme-toggle" type="button" aria-label="Switch to night mode"
         class="grid place-items-center w-[38px] h-[38px] rounded-full
                border border-line bg-white cursor-pointer">
         ☾
       </button>
 
-      <a href="#contact"
+      <a href="login.html"
          class="hidden sm:inline-flex items-center justify-center
                 rounded-full border border-line bg-white px-[1.15rem] py-2
                 font-semibold text-[0.92rem] hover:bg-forest-soft">
         Login
       </a>
 
-      <a href="#contact"
+      <a href="join.html"
          class="inline-flex items-center justify-center rounded-full
                 bg-forest text-white px-[1.15rem] py-2 font-semibold
                 text-[0.92rem] hover:bg-forest-dark">
@@ -1036,7 +1055,24 @@
     </ul>
   </div>
 
-</footer>
+ </footer>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const savedTheme = localStorage.getItem('fittrack-theme');
+  if (savedTheme === 'night') document.body.classList.add('night-mode');
+  function updateThemeButton() {
+    const isNight = document.body.classList.contains('night-mode');
+    themeToggle.textContent = isNight ? '☀' : '☾';
+    themeToggle.setAttribute('aria-label', isNight ? 'Switch to light mode' : 'Switch to night mode');
+  }
+  updateThemeButton();
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('night-mode');
+    localStorage.setItem('fittrack-theme', document.body.classList.contains('night-mode') ? 'night' : 'light');
+    updateThemeButton();
+  });
+</script>
 
 </body>
 </html>
