@@ -65,7 +65,7 @@
     body.night-mode .text-muted { color: #c6d3cc !important; }
     body.night-mode .border-line { border-color: rgba(225, 237, 228, .24) !important; }
     body.night-mode input, body.night-mode select, body.night-mode textarea { background: #36564e; color: #f7f5ec; }
-    body.night-mode .night-login-card { background: rgba(35, 81, 90, .86); color: #f7f5ec; }
+    body.night-mode .night-login-card, body.night-mode .night-join-card { background: rgba(35, 81, 90, .86); color: #f7f5ec; }
     #login-modal:not(.hidden) { display: grid; }
   </style>
 </head>
@@ -114,12 +114,12 @@
         Login
       </button>
 
-      <a href="join.html"
+      <button id="join-trigger" type="button"
          class="inline-flex items-center justify-center rounded-full
                 bg-forest text-white px-[1.15rem] py-2 font-semibold
                 text-[0.92rem] hover:bg-forest-dark">
         Join Now
-      </a>
+      </button>
     </div>
   </nav>
 </header>
@@ -1083,7 +1083,30 @@
       <input required type="password" placeholder="Password" class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
       <button class="w-full rounded-xl bg-forest px-4 py-3 font-semibold text-white hover:bg-forest-dark">Log in</button>
     </form>
-    <p class="mt-4 text-center text-sm text-muted">New here? <a href="join.html" class="font-semibold text-forest">Create an account</a></p>
+    <p class="mt-4 text-center text-sm text-muted">New here? <button id="switch-to-join" type="button" class="font-semibold text-forest">Create an account</button></p>
+  </section>
+</div>
+
+<!-- ================= JOIN MODAL ================= -->
+<div id="join-modal" class="hidden fixed inset-0 z-[100] place-items-center bg-[#18332d]/35 p-4 backdrop-blur-md" aria-hidden="true">
+  <section class="w-full max-w-md rounded-[26px] border border-white/40 bg-white/80 p-7 shadow-2xl backdrop-blur-xl night-join-card" role="dialog" aria-modal="true" aria-labelledby="join-title">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[.18em] text-forest">FitTrack account</p>
+        <h2 id="join-title" class="mt-1 text-2xl font-bold">Start your streak</h2>
+      </div>
+      <button id="join-close" type="button" class="grid h-9 w-9 place-items-center rounded-full border border-line text-lg" aria-label="Close create-account form">×</button>
+    </div>
+    <p class="mt-2 text-sm text-muted">Create your free account without leaving FitTrack.</p>
+    <form id="join-form" class="mt-6 space-y-4">
+      <input required type="text" placeholder="Your name" class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
+      <input required type="email" placeholder="Email address" class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
+      <select class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
+        <option>My goal: Build strength</option><option>My goal: Stay consistent</option><option>My goal: Improve fitness</option>
+      </select>
+      <button class="w-full rounded-xl bg-forest px-4 py-3 font-semibold text-white hover:bg-forest-dark">Create account</button>
+    </form>
+    <p class="mt-4 text-center text-sm text-muted">Already have an account? <button id="switch-to-login" type="button" class="font-semibold text-forest">Log in</button></p>
   </section>
 </div>
 
@@ -1092,6 +1115,9 @@
   const loginTrigger = document.getElementById('login-trigger');
   const loginModal = document.getElementById('login-modal');
   const loginClose = document.getElementById('login-close');
+  const joinTrigger = document.getElementById('join-trigger');
+  const joinModal = document.getElementById('join-modal');
+  const joinClose = document.getElementById('join-close');
   const savedTheme = localStorage.getItem('fittrack-theme');
   if (savedTheme === 'night') document.body.classList.add('night-mode');
   function updateThemeButton() {
@@ -1109,12 +1135,24 @@
     loginModal.classList.toggle('hidden', !open);
     loginModal.setAttribute('aria-hidden', String(!open));
   }
+  function setJoinModal(open) {
+    joinModal.classList.toggle('hidden', !open);
+    joinModal.setAttribute('aria-hidden', String(!open));
+  }
   loginTrigger.addEventListener('click', () => setLoginModal(true));
   loginClose.addEventListener('click', () => setLoginModal(false));
   loginModal.addEventListener('click', (event) => { if (event.target === loginModal) setLoginModal(false); });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setLoginModal(false); });
+  joinTrigger.addEventListener('click', () => setJoinModal(true));
+  joinClose.addEventListener('click', () => setJoinModal(false));
+  joinModal.addEventListener('click', (event) => { if (event.target === joinModal) setJoinModal(false); });
+  document.getElementById('switch-to-join').addEventListener('click', () => { setLoginModal(false); setJoinModal(true); });
+  document.getElementById('switch-to-login').addEventListener('click', () => { setJoinModal(false); setLoginModal(true); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setLoginModal(false); setJoinModal(false); } });
   document.getElementById('login-form').addEventListener('submit', (event) => {
     event.preventDefault(); alert('Demo login successful!'); setLoginModal(false);
+  });
+  document.getElementById('join-form').addEventListener('submit', (event) => {
+    event.preventDefault(); alert('Account created! Please log in to continue.'); setJoinModal(false); setLoginModal(true);
   });
 </script>
 
