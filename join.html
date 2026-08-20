@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join FitTrack</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>body{font-family:Inter,sans-serif;background:#f4f5f1;color:#1c2321}.brand{font-family:'Bebas Neue',sans-serif}body.night{background:#243b37;color:#f7f5ec}.card{background:#fff}body.night .card{background:#2f4c45}body.night input,body.night select{background:#36564e;color:#fff;border-color:#6fa892}</style>
+</head>
+<body class="min-h-screen grid place-items-center p-5">
+  <main class="card w-full max-w-md rounded-3xl border border-[#e3e6df] p-8 shadow-xl">
+    <a href="index.html" class="brand text-3xl tracking-wide text-[#2d6a4f]">◧ FITTRACK</a>
+    <h1 class="mt-8 text-3xl font-bold">Start your streak</h1>
+    <p class="mt-2 text-[#6b7671]">Create your free training dashboard.</p>
+    <form class="mt-7 space-y-4" onsubmit="event.preventDefault(); alert('Welcome to FitTrack!');">
+      <input required placeholder="Your name" class="w-full rounded-xl border border-[#e3e6df] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2d6a4f]">
+      <input required type="email" placeholder="Email address" class="w-full rounded-xl border border-[#e3e6df] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2d6a4f]">
+      <select class="w-full rounded-xl border border-[#e3e6df] px-4 py-3"><option>My goal: Build strength</option><option>My goal: Stay consistent</option><option>My goal: Improve fitness</option></select>
+      <button class="w-full rounded-xl bg-[#2d6a4f] px-4 py-3 font-bold text-white hover:bg-[#1f4d39]">Create free account</button>
+    </form>
+    <p class="mt-5 text-center text-sm text-[#6b7671]">Already a member? <a class="font-bold text-[#2d6a4f]" href="login.html">Log in</a></p>
+  </main>
+  <script>if(localStorage.getItem('fittrack-theme')==='night')document.body.classList.add('night');</script>
+</body>
+</html>
