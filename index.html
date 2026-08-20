@@ -42,7 +42,14 @@
   </script>
   <style>
     body { transition: background-color .35s ease, color .35s ease; }
-    body.night-mode { background: #243b37; color: #f4f5f1; overflow-x: hidden; }
+    body:not(.night-mode) {
+      background: linear-gradient(120deg, #f4f5f1 0%, #edf5ed 48%, #f8eee1 100%);
+      background-size: 200% 200%; animation: lightDrift 16s ease-in-out infinite alternate;
+    }
+    body.night-mode {
+      background: linear-gradient(120deg, #243b37 0%, #243b37 50%, #23515a 50%, #23515a 100%);
+      background-size: 150% 150%; color: #f4f5f1; overflow-x: hidden;
+    }
     body.night-mode::before, body.night-mode::after {
       content: ""; position: fixed; z-index: -1; border-radius: 999px; filter: blur(12px);
       opacity: .42; pointer-events: none; animation: floatGlow 14s ease-in-out infinite alternate;
@@ -50,6 +57,7 @@
     body.night-mode::before { width: 30rem; height: 30rem; background: #6fa892; top: 12%; left: -10rem; }
     body.night-mode::after { width: 26rem; height: 26rem; background: #d6a66f; bottom: -9rem; right: -8rem; animation-delay: -6s; }
     @keyframes floatGlow { from { transform: translate3d(0, 0, 0) scale(.9); } to { transform: translate3d(7rem, -3rem, 0) scale(1.14); } }
+    @keyframes lightDrift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
     body.night-mode nav, body.night-mode article, body.night-mode form, body.night-mode details,
     body.night-mode .bg-white { background-color: rgba(47, 76, 69, .92) !important; }
     body.night-mode .text-ink, body.night-mode h1, body.night-mode h2, body.night-mode h3,
@@ -57,6 +65,8 @@
     body.night-mode .text-muted { color: #c6d3cc !important; }
     body.night-mode .border-line { border-color: rgba(225, 237, 228, .24) !important; }
     body.night-mode input, body.night-mode select, body.night-mode textarea { background: #36564e; color: #f7f5ec; }
+    body.night-mode .night-login-card { background: rgba(35, 81, 90, .86); color: #f7f5ec; }
+    #login-modal:not(.hidden) { display: grid; }
   </style>
 </head>
 
@@ -97,12 +107,12 @@
         ☾
       </button>
 
-      <a href="login.html"
+      <button id="login-trigger" type="button"
          class="hidden sm:inline-flex items-center justify-center
                 rounded-full border border-line bg-white px-[1.15rem] py-2
                 font-semibold text-[0.92rem] hover:bg-forest-soft">
         Login
-      </a>
+      </button>
 
       <a href="join.html"
          class="inline-flex items-center justify-center rounded-full
@@ -1057,8 +1067,31 @@
 
  </footer>
 
+<!-- ================= LOGIN MODAL ================= -->
+<div id="login-modal" class="hidden fixed inset-0 z-[100] place-items-center bg-[#18332d]/35 p-4 backdrop-blur-md" aria-hidden="true">
+  <section class="w-full max-w-md rounded-[26px] border border-white/40 bg-white/80 p-7 shadow-2xl backdrop-blur-xl night-login-card" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[.18em] text-forest">FitTrack account</p>
+        <h2 id="login-title" class="mt-1 text-2xl font-bold">Welcome back</h2>
+      </div>
+      <button id="login-close" type="button" class="grid h-9 w-9 place-items-center rounded-full border border-line text-lg" aria-label="Close login">×</button>
+    </div>
+    <p class="mt-2 text-sm text-muted">Log in without leaving your workout dashboard.</p>
+    <form id="login-form" class="mt-6 space-y-4">
+      <input required type="email" placeholder="Email address" class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
+      <input required type="password" placeholder="Password" class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
+      <button class="w-full rounded-xl bg-forest px-4 py-3 font-semibold text-white hover:bg-forest-dark">Log in</button>
+    </form>
+    <p class="mt-4 text-center text-sm text-muted">New here? <a href="join.html" class="font-semibold text-forest">Create an account</a></p>
+  </section>
+</div>
+
 <script>
   const themeToggle = document.getElementById('theme-toggle');
+  const loginTrigger = document.getElementById('login-trigger');
+  const loginModal = document.getElementById('login-modal');
+  const loginClose = document.getElementById('login-close');
   const savedTheme = localStorage.getItem('fittrack-theme');
   if (savedTheme === 'night') document.body.classList.add('night-mode');
   function updateThemeButton() {
@@ -1071,6 +1104,17 @@
     document.body.classList.toggle('night-mode');
     localStorage.setItem('fittrack-theme', document.body.classList.contains('night-mode') ? 'night' : 'light');
     updateThemeButton();
+  });
+  function setLoginModal(open) {
+    loginModal.classList.toggle('hidden', !open);
+    loginModal.setAttribute('aria-hidden', String(!open));
+  }
+  loginTrigger.addEventListener('click', () => setLoginModal(true));
+  loginClose.addEventListener('click', () => setLoginModal(false));
+  loginModal.addEventListener('click', (event) => { if (event.target === loginModal) setLoginModal(false); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setLoginModal(false); });
+  document.getElementById('login-form').addEventListener('submit', (event) => {
+    event.preventDefault(); alert('Demo login successful!'); setLoginModal(false);
   });
 </script>
 
