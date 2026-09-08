@@ -25,7 +25,7 @@
     body:not(.night-mode) {
       background: linear-gradient(120deg, #f4f5f1 0%, #edf5ed 48%, #f8eee1 100%);
       background-size: 200% 200%;
-      animation: lightDrift 16s ease-in-out infinite alternate;
+      /* background animation removed for simplicity */
     }
 
     body.night-mode {
@@ -35,54 +35,11 @@
       overflow-x: hidden;
     }
 
-    body.night-mode::before,
-    body.night-mode::after {
-      content: "";
-      position: fixed;
-      z-index: -1;
-      border-radius: 999px;
-      filter: blur(12px);
-      opacity: .42;
-      pointer-events: none;
-      animation: floatGlow 14s ease-in-out infinite alternate;
-    }
+    /* night-mode decorative glows removed */
 
-    body.night-mode::before {
-      width: 30rem;
-      height: 30rem;
-      background: #6fa892;
-      top: 12%;
-      left: -10rem;
-    }
+    /* floatGlow animation removed */
 
-    body.night-mode::after {
-      width: 26rem;
-      height: 26rem;
-      background: #d6a66f;
-      bottom: -9rem;
-      right: -8rem;
-      animation-delay: -6s;
-    }
-
-    @keyframes floatGlow {
-      from {
-        transform: translate3d(0, 0, 0) scale(.9);
-      }
-
-      to {
-        transform: translate3d(7rem, -3rem, 0) scale(1.14);
-      }
-    }
-
-    @keyframes lightDrift {
-      from {
-        background-position: 0% 50%;
-      }
-
-      to {
-        background-position: 100% 50%;
-      }
-    }
+    /* lightDrift animation removed */
 
     body.night-mode nav,
     body.night-mode article,
@@ -959,48 +916,6 @@
       <h2 class="font-display uppercase text-[clamp(2rem,5vw,3rem)] mt-2 mb-6">
         Questions, Answered
       </h2>
-
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-
-        <details open class="bg-white border border-line rounded-[18px]
-                    shadow-soft p-6">
-          <summary class="cursor-pointer font-semibold">
-            Is FitTrack free to start?
-          </summary>
-
-          <p class="mt-2 text-sm text-muted">
-            Yes. Log unlimited workouts on the free plan, forever.
-            Upgrade only if you want advanced analytics.
-          </p>
-        </details>
-
-
-        <details class="bg-white border border-line rounded-[18px]
-             shadow-soft p-6">
-          <summary class="cursor-pointer font-semibold">
-            Can I build my own routines?
-          </summary>
-
-          <p class="mt-2 text-sm text-muted">
-            Absolutely. Create splits, save templates, and reuse them
-            with one tap on training day.
-          </p>
-        </details>
-
-
-        <details class="bg-white border border-line rounded-[18px]
-             shadow-soft p-6">
-          <summary class="cursor-pointer font-semibold">
-            Does it track personal records automatically?
-          </summary>
-
-          <p class="mt-2 text-sm text-muted">
-            Every logged set is checked against your history,
-            so PRs are detected and celebrated for you.
-          </p>
-        </details>
-
 
         <details class="bg-white border border-line rounded-[18px]
              shadow-soft p-6">
