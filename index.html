@@ -9,6 +9,34 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Tailwind design tokens (colors / fonts / shadow used throughout the markup) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#16241f',
+            sand: '#f4f5f1',
+            forest: '#2d6a4f',
+            'forest-dark': '#204d39',
+            'forest-soft': '#e6f0ea',
+            ember: '#e2703f',
+            line: '#e1e5dd',
+            muted: '#6b7a72',
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            soft: '0 20px 45px -20px rgba(23, 40, 34, 0.25)',
+          },
+        }
+      }
+    }
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,70 +50,72 @@
       transition: background-color .35s ease, color .35s ease;
     }
 
-    body:not(.night-mode) {
+    /* ---------- light mode (default) ---------- */
+    body {
       background: linear-gradient(120deg, #f4f5f1 0%, #edf5ed 48%, #f8eee1 100%);
       background-size: 200% 200%;
-      /* background animation removed for simplicity */
     }
 
-    body.night-mode {
+    /* ---------- night mode, toggled purely with CSS via the hidden checkbox + :has() ---------- */
+    body:has(#night-toggle:checked) {
       background: linear-gradient(120deg, #243b37 0%, #243b37 50%, #23515a 50%, #23515a 100%);
       background-size: 150% 150%;
       color: #f4f5f1;
       overflow-x: hidden;
     }
 
-    /* night-mode decorative glows removed */
-
-    /* floatGlow animation removed */
-
-    /* lightDrift animation removed */
-
-    body.night-mode nav,
-    body.night-mode article,
-    body.night-mode form,
-    body.night-mode details,
-    body.night-mode .bg-white {
+    body:has(#night-toggle:checked) nav,
+    body:has(#night-toggle:checked) article,
+    body:has(#night-toggle:checked) form,
+    body:has(#night-toggle:checked) details,
+    body:has(#night-toggle:checked) .bg-white {
       background-color: rgba(47, 76, 69, .92) !important;
     }
 
-    body.night-mode .text-ink,
-    body.night-mode h1,
-    body.night-mode h2,
-    body.night-mode h3,
-    body.night-mode h4,
-    body.night-mode strong {
+    body:has(#night-toggle:checked) .text-ink,
+    body:has(#night-toggle:checked) h1,
+    body:has(#night-toggle:checked) h2,
+    body:has(#night-toggle:checked) h3,
+    body:has(#night-toggle:checked) h4,
+    body:has(#night-toggle:checked) strong {
       color: #f7f5ec !important;
     }
 
-    body.night-mode .text-muted {
+    body:has(#night-toggle:checked) .text-muted {
       color: #c6d3cc !important;
     }
 
-    body.night-mode .border-line {
+    body:has(#night-toggle:checked) .border-line {
       border-color: rgba(225, 237, 228, .24) !important;
     }
 
-    body.night-mode input,
-    body.night-mode select,
-    body.night-mode textarea {
+    body:has(#night-toggle:checked) input,
+    body:has(#night-toggle:checked) select,
+    body:has(#night-toggle:checked) textarea {
       background: #36564e;
       color: #f7f5ec;
     }
 
-    body.night-mode .night-login-card,
-    body.night-mode .night-join-card {
-      background: rgba(35, 81, 90, .86);
-      color: #f7f5ec;
-    }
+    /* swap the moon / sun glyph on the theme label depending on checkbox state */
+    .icon-sun { display: none; }
+    body:has(#night-toggle:checked) .icon-moon { display: none; }
+    body:has(#night-toggle:checked) .icon-sun { display: inline; }
 
-    #login-modal:not(.hidden) {
+    /* ---------- pure-CSS modals, opened/closed with URL fragments (:target) ---------- */
+    .modal {
+      display: none;
+    }
+    .modal:target {
       display: grid;
+      place-items: center;
     }
   </style>
 </head>
 
 <body id="top" class="m-0 bg-sand text-ink font-body leading-relaxed antialiased">
+
+  <!-- hidden checkbox driving the night-mode toggle, no JS required -->
+  <input type="checkbox" id="night-toggle" class="hidden">
 
   <!-- ================= HEADER ================= -->
   <header class="sticky top-3 z-50 px-4">
@@ -115,16 +145,12 @@
       </ul>
 
       <div class="flex items-center gap-2">
-        <button id="theme-toggle" type="button" aria-label="Switch to night mode" class="grid place-items-center w-[38px] h-[38px] rounded-full
+        <label for="night-toggle" aria-label="Toggle night mode" class="grid place-items-center w-[38px] h-[38px] rounded-full
                border border-line bg-white cursor-pointer">
-          ☾
-        </button>
+          <span class="icon-moon">☾</span>
+          <span class="icon-sun">☀</span>
+        </label>
 
-        <button id="join-trigger" type="button" class="inline-flex items-center justify-center rounded-full
-                bg-forest text-white px-[1.15rem] py-2 font-semibold
-                text-[0.92rem] hover:bg-forest-dark">
-          Join Now
-        </button>
       </div>
     </nav>
   </header>
@@ -307,9 +333,9 @@
                   bg-[#fdece1] text-ember mb-4">
             ⚡
           </div>
-          <div id="metric-calories" class="text-[1.9rem] font-bold">684</div>
+          <div class="text-[1.9rem] font-bold">684</div>
           <div class="text-muted text-[0.92rem]">Calories Burned</div>
-          <div id="metric-calories-sub" class="mt-3 font-mono text-xs text-ember">▲ +8% vs avg</div>
+          <div class="mt-3 font-mono text-xs text-ember">▲ +8% vs avg</div>
         </article>
 
         <article class="bg-white border border-line rounded-[18px]
@@ -318,9 +344,9 @@
                   bg-forest-soft text-forest mb-4">
             ⇄
           </div>
-          <div id="metric-sets" class="text-[1.9rem] font-bold">28</div>
+          <div class="text-[1.9rem] font-bold">28</div>
           <div class="text-muted text-[0.92rem]">Total Sets</div>
-          <div id="metric-sets-sub" class="mt-3 font-mono text-xs text-muted">▲ +3 sets</div>
+          <div class="mt-3 font-mono text-xs text-muted">▲ +3 sets</div>
         </article>
 
         <article class="bg-white border border-line rounded-[18px]
@@ -329,9 +355,9 @@
                   bg-forest-soft text-forest mb-4">
             ◎
           </div>
-          <div id="metric-reps" class="text-[1.9rem] font-bold">342</div>
+          <div class="text-[1.9rem] font-bold">342</div>
           <div class="text-muted text-[0.92rem]">Total Reps</div>
-          <div id="metric-reps-sub" class="mt-3 font-mono text-xs text-muted">▲ +11% this week</div>
+          <div class="mt-3 font-mono text-xs text-muted">▲ +11% this week</div>
         </article>
 
         <article class="bg-white border border-line rounded-[18px]
@@ -340,9 +366,9 @@
                   bg-forest-soft text-forest mb-4">
             ◷
           </div>
-          <div id="metric-duration" class="text-[1.9rem] font-bold">54m</div>
+          <div class="text-[1.9rem] font-bold">54m</div>
           <div class="text-muted text-[0.92rem]">Workout Duration</div>
-          <div id="metric-duration-sub" class="mt-3 font-mono text-xs text-muted">▲ on pace</div>
+          <div class="mt-3 font-mono text-xs text-muted">▲ on pace</div>
         </article>
 
         <article class="bg-white border border-line rounded-[18px]
@@ -351,9 +377,9 @@
                   bg-[#fdece1] text-ember mb-4">
             ▲
           </div>
-          <div id="metric-streak" class="text-[1.9rem] font-bold">12</div>
+          <div class="text-[1.9rem] font-bold">12</div>
           <div class="text-muted text-[0.92rem]">Current Streak</div>
-          <div id="metric-streak-sub" class="mt-3 font-mono text-xs text-ember">▲ personal best</div>
+          <div class="mt-3 font-mono text-xs text-ember">▲ personal best</div>
         </article>
 
       </div>
@@ -369,14 +395,14 @@
             Today
           </p>
 
-          <div id="completion-ring" class="w-[180px] h-[180px] mx-auto my-5 rounded-full
+          <div class="w-[180px] h-[180px] mx-auto my-5 rounded-full
                   grid place-items-center
                   [background:conic-gradient(#2d6a4f_0_78%,#e8ece6_78%_100%)]">
 
             <div class="w-[152px] h-[152px] rounded-full bg-white
                     grid place-items-center">
               <div>
-                <strong id="completion-pct" class="block text-3xl">78%</strong>
+                <strong class="block text-3xl">78%</strong>
                 <span class="font-mono text-[0.66rem] tracking-[0.16em] text-muted">
                   Complete
                 </span>
@@ -389,7 +415,7 @@
             Daily Workout Completion
           </h3>
 
-          <p id="completion-desc" class="text-sm text-muted">
+          <p class="text-sm text-muted">
             5 of 6 planned exercises finished. One more set of Bicep Curls
             to hit 100%.
           </p>
@@ -483,9 +509,9 @@
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-4">
 
         <!-- Form -->
-        <form id="exercise-form" class="bg-white border border-line rounded-[18px] shadow-soft p-6">
+        <form class="bg-white border border-line rounded-[18px] shadow-soft p-6">
 
-          <h3 id="form-title" class="text-lg font-semibold">Exercise Logger</h3>
+          <h3 class="text-lg font-semibold">Exercise Logger</h3>
 
           <p class="mt-1 mb-5 text-sm text-muted">
             Fill in the details below to add a new entry.
@@ -496,7 +522,7 @@
             Exercise name
           </label>
 
-          <input id="exercise-name" type="text" value="Incline Dumbbell Press" placeholder="e.g. Incline Dumbbell Press" class="w-full border border-line rounded-full px-4 py-2.5 mb-4
+          <input type="text" value="Incline Dumbbell Press" placeholder="e.g. Incline Dumbbell Press" class="w-full border border-line rounded-full px-4 py-2.5 mb-4
                     focus:outline-none focus:ring-2 focus:ring-forest">
 
 
@@ -508,7 +534,7 @@
                 Category
               </label>
 
-              <select id="exercise-category" class="w-full border border-line rounded-full
+              <select class="w-full border border-line rounded-full
                          px-4 py-2.5 bg-white">
                 <option>Chest</option>
                 <option>Back</option>
@@ -524,7 +550,7 @@
                 Weight (kg)
               </label>
 
-              <input id="exercise-weight" type="number" value="24" placeholder="60" class="w-full border border-line rounded-full px-4 py-2.5">
+              <input type="number" value="24" placeholder="60" class="w-full border border-line rounded-full px-4 py-2.5">
             </div>
 
           </div>
@@ -538,7 +564,7 @@
                 Sets
               </label>
 
-              <input id="exercise-sets" type="number" value="4" placeholder="4" class="w-full border border-line rounded-full px-4 py-2.5">
+              <input type="number" value="4" placeholder="4" class="w-full border border-line rounded-full px-4 py-2.5">
             </div>
 
             <div>
@@ -547,7 +573,7 @@
                 Reps
               </label>
 
-              <input id="exercise-reps" type="number" value="10" placeholder="10" class="w-full border border-line rounded-full px-4 py-2.5">
+              <input type="number" value="10" placeholder="10" class="w-full border border-line rounded-full px-4 py-2.5">
             </div>
 
           </div>
@@ -558,7 +584,7 @@
             Duration (min)
           </label>
 
-          <input id="exercise-duration" type="number" value="9" placeholder="12" class="w-full border border-line rounded-full px-4 py-2.5 mb-4">
+          <input type="number" value="9" placeholder="12" class="w-full border border-line rounded-full px-4 py-2.5 mb-4">
 
 
           <label class="block font-mono text-[0.66rem] uppercase
@@ -566,7 +592,7 @@
             Notes
           </label>
 
-          <textarea id="exercise-notes" placeholder="How did it feel? Any form cues to remember." class="w-full min-h-[84px] resize-y border border-line
+          <textarea placeholder="How did it feel? Any form cues to remember." class="w-full min-h-[84px] resize-y border border-line
                rounded-2xl px-4 py-3 mb-4">Full stretch at the bottom, controlled press.</textarea>
 
 
@@ -587,7 +613,7 @@
 
             <h3 class="text-lg font-semibold">Today's Workout</h3>
 
-            <span id="workout-date-chip" class="rounded-full bg-forest-soft px-3.5 py-1.5
+            <span class="rounded-full bg-forest-soft px-3.5 py-1.5
                      font-mono text-xs text-forest-dark">
               Sun, 16 Aug · Upper &amp; Lower Split
             </span>
@@ -632,7 +658,7 @@
                 </tr>
               </thead>
 
-              <tbody id="workout-table-body">
+              <tbody>
 
                 <tr>
                   <td class="py-4 border-b border-line">
@@ -822,7 +848,7 @@
         <article class="overflow-hidden border border-line bg-white
                     rounded-[18px] shadow-soft">
 
-          <img src="./Image/arms.jpg" alt="Dumbbells on a rack" class="h-52 w-full object-cover hover:scale-105
+          <img src="https://niveditanandurkar.github.io/FitTrack/Image/arms.jpg" alt="Dumbbells on a rack" class="h-52 w-full object-cover hover:scale-105
                   transition-transform duration-300">
 
           <div class="p-5">
@@ -838,7 +864,7 @@
         <article class="overflow-hidden border border-line bg-white
                     rounded-[18px] shadow-soft">
 
-          <img src="./Image/shoulders.jpg" alt="Athlete pressing a barbell overhead" class="h-52 w-full object-cover hover:scale-105
+          <img src="https://niveditanandurkar.github.io/FitTrack/Image/shoulders.jpg" alt="Athlete pressing a barbell overhead" class="h-52 w-full object-cover hover:scale-105
                   transition-transform duration-300">
 
           <div class="p-5">
@@ -854,7 +880,7 @@
         <article class="overflow-hidden border border-line bg-white 
                     rounded-[18px] shadow-soft">
 
-          <img src="./Image/mobility.jpg" alt="Open gym floor" class="h-52 w-full object-cover hover:scale-105
+          <img src="https://niveditanandurkar.github.io/FitTrack/Image/mobility.jpg" alt="Open gym floor" class="h-52 w-full object-cover hover:scale-105
                   transition-transform duration-300">
 
           <div class="p-5">
@@ -870,7 +896,7 @@
         <article class="overflow-hidden border border-line bg-white
                     rounded-[18px] shadow-soft">
 
-          <img src="./Image/legs.jpg" alt="Squat rack loaded with plates" class="h-52 w-full object-cover hover:scale-105
+          <img src="https://niveditanandurkar.github.io/FitTrack/Image/legs.jpg" alt="Squat rack loaded with plates" class="h-52 w-full object-cover hover:scale-105
                   transition-transform duration-300">
 
           <div class="p-5">
@@ -917,19 +943,18 @@
         Questions, Answered
       </h2>
 
-        <details class="bg-white border border-line rounded-[18px]
-             shadow-soft p-6">
-          <summary class="cursor-pointer font-semibold">
-            Does it work on my phone?
-          </summary>
+      <details class="bg-white border border-line rounded-[18px]
+           shadow-soft p-6">
+        <summary class="cursor-pointer font-semibold">
+          Does it work on my phone?
+        </summary>
 
-          <p class="mt-2 text-sm text-muted">
-            FitTrack is fully responsive and made to be used
-            one-handed between sets.
-          </p>
-        </details>
+        <p class="mt-2 text-sm text-muted">
+          FitTrack is fully responsive and made to be used
+          one-handed between sets.
+        </p>
+      </details>
 
-      </div>
     </section>
 
 
@@ -948,10 +973,6 @@
           effort into visible progress.
         </p>
 
-        <a href="#top" class="inline-flex mt-7 rounded-full bg-white text-ink
-              px-6 py-3 font-semibold hover:bg-forest-soft">
-          Create Free Account
-        </a>
 
       </div>
     </section>
@@ -1021,52 +1042,12 @@
 
   </footer>
 
-  <!-- ================= LOGIN MODAL ================= -->
-  <div id="login-modal" class="hidden fixed inset-0 z-[100] place-items-center bg-[#18332d]/35 p-4 backdrop-blur-md"
-    aria-hidden="true">
-    <section
-      class="w-full max-w-md rounded-[26px] border border-white/40 bg-white/80 p-7 shadow-2xl backdrop-blur-xl night-login-card"
-      role="dialog" aria-modal="true" aria-labelledby="login-title">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <p class="font-mono text-xs uppercase tracking-[.18em] text-forest">FitTrack account</p>
-          <h2 id="login-title" class="mt-1 text-2xl font-bold">Welcome back</h2>
-        </div>
-        <button id="login-close" type="button"
-          class="grid h-9 w-9 place-items-center rounded-full border border-line text-lg"
-          aria-label="Close login">×</button>
-      </div>
-      <p class="mt-2 text-sm text-muted">Log in without leaving your workout dashboard.</p>
-      <form id="login-form" class="mt-6 space-y-4">
-        <input required type="email" placeholder="Email address"
-          class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
-        <input required type="password" placeholder="Password"
-          class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
-        <button class="w-full rounded-xl bg-forest px-4 py-3 font-semibold text-white hover:bg-forest-dark">Log
-          in</button>
-      </form>
-      <p class="mt-4 text-center text-sm text-muted">New here? <button id="switch-to-join" type="button"
-          class="font-semibold text-forest">Create an account</button></p>
-    </section>
-  </div>
 
-  <!-- ================= JOIN MODAL ================= -->
-  <div id="join-modal" class="hidden fixed inset-0 z-[100] place-items-center bg-[#18332d]/35 p-4 backdrop-blur-md"
-    aria-hidden="true">
-    <section
-      class="w-full max-w-md rounded-[26px] border border-white/40 bg-white/80 p-7 shadow-2xl backdrop-blur-xl night-join-card"
-      role="dialog" aria-modal="true" aria-labelledby="join-title">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <p class="font-mono text-xs uppercase tracking-[.18em] text-forest">FitTrack account</p>
-          <h2 id="join-title" class="mt-1 text-2xl font-bold">Start your streak</h2>
-        </div>
-        <button id="join-close" type="button"
-          class="grid h-9 w-9 place-items-center rounded-full border border-line text-lg"
-          aria-label="Close create-account form">×</button>
+        <a href="#" class="grid h-9 w-9 place-items-center rounded-full border border-line text-lg"
+          aria-label="Close create-account form">×</a>
       </div>
       <p class="mt-2 text-sm text-muted">Create your free account without leaving FitTrack.</p>
-      <form id="join-form" class="mt-6 space-y-4">
+      <form class="mt-6 space-y-4">
         <input required type="text" placeholder="Your name"
           class="w-full rounded-xl border border-line bg-white/80 px-4 py-3 outline-none focus:ring-2 focus:ring-forest">
         <input required type="email" placeholder="Email address"
@@ -1080,181 +1061,11 @@
         <button class="w-full rounded-xl bg-forest px-4 py-3 font-semibold text-white hover:bg-forest-dark">Create
           account</button>
       </form>
-      <p class="mt-4 text-center text-sm text-muted">Already have an account? <button id="switch-to-login" type="button"
-          class="font-semibold text-forest">Log in</button></p>
+      <p class="mt-4 text-center text-sm text-muted">Already have an account?
+        <a href="#login-modal" class="font-semibold text-forest">Log in</a>
+      </p>
     </section>
   </div>
-
-  <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const loginTrigger = document.getElementById('login-trigger');
-    const loginModal = document.getElementById('login-modal');
-    const loginClose = document.getElementById('login-close');
-    const joinTrigger = document.getElementById('join-trigger');
-    const joinModal = document.getElementById('join-modal');
-    const joinClose = document.getElementById('join-close');
-    const savedTheme = localStorage.getItem('fittrack-theme');
-    if (savedTheme === 'night') document.body.classList.add('night-mode');
-    function updateThemeButton() {
-      const isNight = document.body.classList.contains('night-mode');
-      themeToggle.textContent = isNight ? '☀' : '☾';
-      themeToggle.setAttribute('aria-label', isNight ? 'Switch to light mode' : 'Switch to night mode');
-    }
-    updateThemeButton();
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('night-mode');
-      localStorage.setItem('fittrack-theme', document.body.classList.contains('night-mode') ? 'night' : 'light');
-      updateThemeButton();
-    });
-    function setLoginModal(open) {
-      loginModal.classList.toggle('hidden', !open);
-      loginModal.setAttribute('aria-hidden', String(!open));
-    }
-    function setJoinModal(open) {
-      joinModal.classList.toggle('hidden', !open);
-      joinModal.setAttribute('aria-hidden', String(!open));
-    }
-    loginTrigger.addEventListener('click', () => setLoginModal(true));
-    loginClose.addEventListener('click', () => setLoginModal(false));
-    loginModal.addEventListener('click', (event) => { if (event.target === loginModal) setLoginModal(false); });
-    joinTrigger.addEventListener('click', () => setJoinModal(true));
-    joinClose.addEventListener('click', () => setJoinModal(false));
-    joinModal.addEventListener('click', (event) => { if (event.target === joinModal) setJoinModal(false); });
-    document.getElementById('switch-to-join').addEventListener('click', () => { setLoginModal(false); setJoinModal(true); });
-    document.getElementById('switch-to-login').addEventListener('click', () => { setJoinModal(false); setLoginModal(true); });
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setLoginModal(false); setJoinModal(false); } });
-    document.getElementById('login-form').addEventListener('submit', (event) => {
-      event.preventDefault(); alert('Demo login successful!'); setLoginModal(false);
-    });
-    document.getElementById('join-form').addEventListener('submit', (event) => {
-      event.preventDefault(); alert('Account created! Please log in to continue.'); setJoinModal(false); setLoginModal(true);
-    });
-  </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('exercise-form');
-  const tbody = document.getElementById('workout-table-body');
-  const STORAGE_KEY = 'fittrack_todays_session_v2';
-
-  function loadSession() {
-    const data = localStorage.getItem(STORAGE_KEY);
-    if (data) return JSON.parse(data);
-    // No stored data, derive from existing static rows
-    const existing = [];
-    tbody.querySelectorAll('tr').forEach(tr => {
-      const nameElem = tr.querySelector('td strong');
-      const categoryElem = tr.querySelector('td small');
-      const name = nameElem ? nameElem.textContent.replace('●', '').trim() : '';
-      const category = categoryElem ? categoryElem.textContent.trim() : '';
-      const cells = tr.querySelectorAll('td');
-      const sets = cells[1]?.textContent?.trim() || '';
-      const reps = cells[2]?.textContent?.trim() || '';
-      const weight = cells[3]?.textContent?.trim().replace('kg','').trim() || '';
-      existing.push({name, category, sets, reps, weight, duration: '', notes: ''});
-    });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
-    return existing;
-  }
-  function saveSession(session) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
-  }
-  function renderTable(session) {
-    tbody.innerHTML = '';
-    session.forEach((ex, idx) => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="py-4 border-b border-line"><strong class="block">● ${ex.name}</strong> <small class="text-muted">${ex.category}</small></td>
-        <td class="py-4 border-b border-line font-mono">${ex.sets}</td>
-        <td class="py-4 border-b border-line font-mono">${ex.reps}</td>
-        <td class="py-4 border-b border-line font-mono">${ex.weight} kg</td>
-        <td class="py-4 border-b border-line text-right"><button data-index="${idx}" class="delete btn">✕</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-function updateMetrics(session) {
-    const totalSets = session.reduce((sum, ex) => sum + (parseInt(ex.sets) || 0), 0);
-    const totalReps = session.reduce((sum, ex) => sum + (parseInt(ex.reps) || 0), 0);
-    const totalDuration = session.reduce((sum, ex) => sum + (parseInt(ex.duration) || 0), 0);
-    const reps = Math.max(totalReps, 1);
-    const sets = Math.max(totalSets, 1);
-    const calories = Math.round(reps * 0.4 + sets * 6);
-
-    const setEl = document.getElementById('metric-sets');
-    const repEl = document.getElementById('metric-reps');
-    const calEl = document.getElementById('metric-calories');
-    const durEl = document.getElementById('metric-duration');
-    const calSub = document.getElementById('metric-calories-sub');
-    const durSub = document.getElementById('metric-duration-sub');
-    const chip = document.getElementById('workout-date-chip');
-
-    setEl.textContent = totalSets;
-    repEl.textContent = totalReps;
-    calEl.textContent = calories.toLocaleString();
-    durEl.textContent = totalDuration ? totalDuration + 'm' : '0m';
-
-    if (session.length === 0) {
-      setEl.textContent = 0;
-      repEl.textContent = 0;
-      calEl.textContent = 0;
-      durEl.textContent = '0m';
-      calSub.textContent = '— add a set to start';
-      durSub.textContent = '— no time logged';
-      chip.textContent = "Today · No exercises logged";
-    } else {
-      calSub.textContent = `▲ ~${calories} kcal from ${session.length} exercise(s)`;
-      durSub.textContent = `${totalDuration} min across ${session.length} exercise(s)`;
-      chip.textContent = `Today · ${session.length} exercises logged`;
-    }
-
-    const PLANNED = 6;
-    const pct = Math.min(100, Math.round((session.length / PLANNED) * 100));
-    const ring = document.getElementById('completion-ring');
-    const pctEl = document.getElementById('completion-pct');
-    pctEl.textContent = session.length === 0 ? '0%' : pct + '%';
-    ring.style.background = `conic-gradient(#2d6a4f_0_${pct}%,#e8ece6_${pct}%_100%)`;
-    const desc = document.getElementById('completion-desc');
-    desc.textContent = session.length === 0
-      ? "Nothing logged yet. Add your first exercise to start today's session."
-      : `${session.length} of ${PLANNED} planned exercises finished. ${PLANNED - session.length > 0 ? (PLANNED - session.length) + ' more to hit 100%.' : 'Full session complete!'}`;
-}
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const entry = {
-      name: document.getElementById('exercise-name').value,
-      category: document.getElementById('exercise-category').value,
-      weight: document.getElementById('exercise-weight').value,
-      sets: document.getElementById('exercise-sets').value,
-      reps: document.getElementById('exercise-reps').value,
-      duration: document.getElementById('exercise-duration').value,
-      notes: document.getElementById('exercise-notes').value,
-    };
-    const session = loadSession();
-    session.push(entry);
-    saveSession(session);
-    renderTable(session);
-    updateMetrics(session);
-    form.reset();
-  });
-
-  tbody.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete')) {
-      const idx = e.target.dataset.index;
-      const session = loadSession();
-      session.splice(idx, 1);
-      saveSession(session);
-      renderTable(session);
-      updateMetrics(session);
-    }
-  });
-
-  // Initial render
-  const initialSession = loadSession();
-  renderTable(initialSession);
-  updateMetrics(initialSession);
-});
-</script>
 
 </body>
 
